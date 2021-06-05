@@ -68,7 +68,7 @@ def projecao(vetor1, vetor2):
     resp = Vetor(vetor2.x*proj, vetor2.y*proj,vetor2.z*proj)
     return resp
 
- def reflexao(vetor1, vetor2):
+def reflexao(vetor1, vetor2):
     proj12 = projecao(vetor1, vetor2)
     vetor3 = Vetor(2*proj12.x - vetor1.x, 2*proj12.y - vetor1.y, 2*proj12.z - vetor1.z)
     return vetor3
@@ -85,4 +85,4 @@ print(vv.x, vv.y, vv.z) #Projeção
 rr = reflexao(vetor1, vetor2)
 print(rr.x, rr.y, rr.z)
 print(esfera.getCentro(), esfera.getRaio())
-print(norma(vetor1))
+print(norma(vetor1), norma(rr))
