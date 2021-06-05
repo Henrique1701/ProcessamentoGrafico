@@ -34,9 +34,9 @@ class Vetor:
     return self.z
 
 class Reta:
-    def __init__(self, ponto, vetordiretor):
-        self.ponto = ponto
-        self.vetordiretor = vetordiretor
+  def __init__(self, ponto, vetordiretor):
+      self.ponto = ponto
+      self.vetordiretor = vetordiretor
   
 class Esfera:
   def __init__(self, ponto, raio):
