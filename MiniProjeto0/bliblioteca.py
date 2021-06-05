@@ -66,8 +66,12 @@ def projecao(vetor1, vetor2):
     vetorModuloQuadrado = vetor2.x**2 + vetor2.y**2 + vetor2.z**2 #checar o modulo(abs) dessa parte depois q nao tava indo
     proj = prodEscalar / vetorModuloQuadrado
     resp = Vetor(vetor2.x*proj, vetor2.y*proj,vetor2.z*proj)
-    return resp.getVetor()
+    return resp
 
+ def reflexao(vetor1, vetor2):
+    proj12 = projecao(vetor1, vetor2)
+    vetor3 = Vetor(2*proj12.x - vetor1.x, 2*proj12.y - vetor1.y, 2*proj12.z - vetor1.z)
+    return vetor3
 
 #TESTES
 vetor1 = Vetor(2, 1, -2)
@@ -76,6 +80,9 @@ esfera = Esfera(Ponto(2, 1, -2), 6)
 print(vetor1.getVetor())
 
 print(produtoEscalar(vetor1, vetor2)) #ProdutoEscalar
-print(projecao(vetor1,vetor2)) #Projeção
+vv = projecao(vetor1,vetor2)
+print(vv.x, vv.y, vv.z) #Projeção
+rr = reflexao(vetor1, vetor2)
+print(rr.x, rr.y, rr.z)
 print(esfera.getCentro(), esfera.getRaio())
 print(norma(vetor1))
