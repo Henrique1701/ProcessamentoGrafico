@@ -1,3 +1,5 @@
+import math
+
 #As estruturas básicas precisam ser classes de acordo com as especificações. Aí o resto faz por metodo mesmo.
 
 #ESTRUTURAS
@@ -31,7 +33,11 @@ class Vetor:
   def getZ(self):
     return self.z
 
-
+class Reta:
+    def __init__(self, ponto, vetordiretor):
+        self.ponto = ponto
+        self.vetordiretor = vetordiretor
+  
 class Esfera:
   def __init__(self, ponto, raio):
       self.ponto = ponto #Usei o Ponto pra fazer o centro porque é mesma estrutura
@@ -52,6 +58,9 @@ def produtoEscalar(vetor1, vetor2):
     soma = produto1 + produto2 + produto3
     return soma
 
+def norma(vetor):
+    return math.sqrt(produtoEscalar(vetor, vetor))
+
 def projecao(vetor1, vetor2):
     prodEscalar = produtoEscalar(vetor1, vetor2)
     vetorModuloQuadrado = vetor2.x**2 + vetor2.y**2 + vetor2.z**2 #checar o modulo(abs) dessa parte depois q nao tava indo
@@ -69,3 +78,4 @@ print(vetor1.getVetor())
 print(produtoEscalar(vetor1, vetor2)) #ProdutoEscalar
 print(projecao(vetor1,vetor2)) #Projeção
 print(esfera.getCentro(), esfera.getRaio())
+print(norma(vetor1))
