@@ -24,3 +24,16 @@
 8. - [x] saoParalelos(vetor1, vetor2) => boolean; Igor
 7. - [ ] saoOrtogonais(vetor1, vetor2) => boolean; Evaldo
 8. - [ ] eLI([vetor1, ..., vetorn]) => boolean; Melissa
+
+1. - [x] diretor(reta) => vetor; Melissa
+2. - [ ] normal(plano) => vetor; Evaldo
+3. - [ ] eParalelo(vetor, reta) => boolean; Igor
+4. - [ ] eOrtogonal(vetor, plano) => boolean; Mateus
+5. - [ ] projecao(vetor, reta) => vetorProjetado; Henrique
+6. - [ ] projecao(vetor, plano) => vetorProjetado; Melissa
+7. - [ ] componenteOrtogonal(vetor, plano) => vetor; Evaldo
+8. - [ ] saoComplementosOrtogonais(reta, plano) => boolean; Igor
+9. - [ ] saoComplementosOrtogonais(plano, reta) => boolean; Mateus
+10.- [ ] formaCartesiana(plano) => [a,b,c,d]  Henrique
+11.- [ ] formaCartesiana(reta) => [[a,b,c,d],[e,f,g,h]]  Melissa
+
