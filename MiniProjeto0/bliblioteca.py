@@ -33,6 +33,18 @@ class Vetor:
   def getZ(self):
     return self.z
 
+class Segmento:
+	def __init__(self, ponto1, ponto2):
+		self.ponto1 = ponto1;
+		self.ponto2 = ponto2;
+
+	def getSegmento(self):
+		return self.ponto1.getPonto(), self.ponto2.getPonto()
+	def getPonto1(self):
+		return self.ponto1.getPonto()
+	def getPonto2(self):
+		return self.ponto2.getPonto()  
+  
 class Reta:
   def __init__(self, ponto, vetordiretor):
       self.ponto = ponto
@@ -65,6 +77,15 @@ class Esfera:
   def getRaio(self):
     return self.raio
 
+class Base: 
+	def __init__(self, vetor1, vetor2, vetor3):
+		self.vetor1 = vetor1
+		self.vetor2 = vetor2
+		self.vetor3 = vetor3
+
+	def getBase(self):
+		return self.vetor1.getVetor(), self.vetor2.getVetor(), self.vetor3.getVetor()
+
 #FUNÇÕES
 def produtoEscalar(vetor1, vetor2):
     produto1 = vetor1.x * vetor2.x
@@ -75,6 +96,14 @@ def produtoEscalar(vetor1, vetor2):
 
 def norma(vetor):
     return math.sqrt(produtoEscalar(vetor, vetor))
+  
+def normalize(vetor):
+    normaVetor = norma(vetor)
+    x = vetor.x / normaVetor
+    y = vetor.y / normaVetor
+    z = vetor.z / normaVetor 
+    vetorNormalidado = [x, y, z]
+    return vetorNormalidado  
 
 def projecao(vetor1, vetor2):
     prodEscalar = produtoEscalar(vetor1, vetor2)
@@ -94,6 +123,25 @@ def reflexao(vetor1, vetor2):
     vetor3 = Vetor(2*proj12.x - vetor1.x, 2*proj12.y - vetor1.y, 2*proj12.z - vetor1.z)
     return vetor3
 
+ def saoParalelos(vetor1, vetor2):
+	div1 = 0
+	div2 = 0
+	div3 = 0
+
+	if vetor1.x*vetor2.x != 0:
+		div1 = vetor1.x/vetor2.x
+	if vetor1.y*vetor2.y != 0:
+		div2 = vetor1.y/vetor2.y
+	if vetor1.z*vetor2.z != 0:
+		div3 = vetor1.z/vetor2.z
+
+	if ((div1 != 0) and (div1 == div2 and div2 == div3)):
+		return True
+	elif ((vetor1.x == 0 and vetor1.y == 0 and vetor1.z == 0) or (vetor2.x == 0 and vetor2.y == 0 and vetor2.z == 0)): 
+		return True
+	else: 
+		return False 
+  
 #TESTES
 vetor1 = Vetor(2, 1, -2)
 vetor2 = Vetor(4, 4, 2)
