@@ -44,14 +44,14 @@ class Plano:
       self.vetorNormal = vetorNormal
   
   def getConstante(self):
-    produto1 = self.vetorNormal.getX * self.ponto.getX
-    produto2 = self.vetorNormal.getY * self.ponto.getY
-    produto3 = self.vetorNormal.getZ * self.ponto.getZ
+    produto1 = self.vetorNormal.getX() * self.ponto.getX()
+    produto2 = self.vetorNormal.getY() * self.ponto.getY()
+    produto3 = self.vetorNormal.getZ() * self.ponto.getZ()
     return - produto1 - produto2 - produto3
 
   def getEqGeral(self):
     #Equação geral do plano: ax+by+cz+d = 0
-    return self.vetorNormal.getX, self.vetorNormal.Y, self.vetorNormal.getZ, self.getConstante
+    return self.vetorNormal.getX(), self.vetorNormal.getY(), self.vetorNormal.getZ(), self.getConstante()
 
 class Esfera:
   def __init__(self, ponto, raio):
@@ -107,3 +107,8 @@ rr = reflexao(vetor1, vetor2)
 print(rr.x, rr.y, rr.z)
 print(esfera.getCentro(), esfera.getRaio())
 print(norma(vetor1), norma(rr))
+
+ponto = Ponto(2, -1, 3)
+vetorNormal = Vetor(3, 2, -4)
+plano = Plano(ponto, vetorNormal)
+print(plano.getEqGeral())
