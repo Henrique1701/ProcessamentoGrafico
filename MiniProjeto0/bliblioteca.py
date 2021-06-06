@@ -67,7 +67,7 @@ class Plano:
 
 class Esfera:
   def __init__(self, ponto, raio):
-      self.ponto = ponto #Usei o Ponto pra fazer o centro porque é mesma estrutura
+      self.ponto = ponto 
       self.raio = raio 
 
   def getEsfera(self):
@@ -107,9 +107,9 @@ def normalize(vetor):
   
 def projecao(vetor1, vetor2):
     prodEscalar = produtoEscalar(vetor1, vetor2)
-    vetorModuloQuadrado = vetor2.x**2 + vetor2.y**2 + vetor2.z**2 #checar o modulo(abs) dessa parte depois q nao tava indo
-    proj = prodEscalar / vetorModuloQuadrado
-    resp = Vetor(vetor2.x*proj, vetor2.y*proj,vetor2.z*proj)
+    vetorModuloQuadrado = math.pow(norma(vetor2), 2)
+    mt = prodEscalar / vetorModuloQuadrado
+    resp = Vetor(vetor2.x*mt, vetor2.y*mt,vetor2.z*mt)
     return resp
 
 def produtoVetorial(vetor1: Vetor, vetor2: Vetor):
@@ -140,16 +140,23 @@ def saoParalelos(vetor1, vetor2):
 	elif ((vetor1.x == 0 and vetor1.y == 0 and vetor1.z == 0) or (vetor2.x == 0 and vetor2.y == 0 and vetor2.z == 0)): 
 		return True
 	else: 
-		return False  
+		return False 
+
+##OBJETOS
+
+def diretor(reta):
+    return reta.vetorDiretor
   
 #TESTES
 vetor1 = Vetor(2, 1, -2)
 vetor2 = Vetor(4, 4, 2)
+vetor3 = Vetor(2, 3, 4)
+vetor4 = Vetor(1, -1, 0)
 esfera = Esfera(Ponto(2, 1, -2), 6)
 print(vetor1.getVetor())
 
 print(produtoEscalar(vetor1, vetor2)) #ProdutoEscalar
-vv = projecao(vetor1,vetor2)
+vv = projecao(vetor3,vetor4)
 print(vv.x, vv.y, vv.z) #Projeção
 rr = reflexao(vetor1, vetor2)
 print(rr.x, rr.y, rr.z)
