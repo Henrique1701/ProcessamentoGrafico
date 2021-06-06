@@ -37,7 +37,22 @@ class Reta:
   def __init__(self, ponto, vetordiretor):
       self.ponto = ponto
       self.vetordiretor = vetordiretor
+
+class Plano:
+  def __init__(self, ponto: Ponto, vetorNormal: Vetor) -> None:
+      self.ponto = ponto
+      self.vetorNormal = vetorNormal
   
+  def getConstante(self):
+    produto1 = self.vetorNormal.getX * self.ponto.getX
+    produto2 = self.vetorNormal.getY * self.ponto.getY
+    produto3 = self.vetorNormal.getZ * self.ponto.getZ
+    return - produto1 - produto2 - produto3
+
+  def getEqGeral(self):
+    #Equação geral do plano: ax+by+cz+d = 0
+    return self.vetorNormal.getX, self.vetorNormal.Y, self.vetorNormal.getZ, self.getConstante
+
 class Esfera:
   def __init__(self, ponto, raio):
       self.ponto = ponto #Usei o Ponto pra fazer o centro porque é mesma estrutura
