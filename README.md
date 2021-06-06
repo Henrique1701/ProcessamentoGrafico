@@ -36,6 +36,6 @@
 7. - [ ] componenteOrtogonal(vetor, plano) => vetor; Evaldo
 8. - [ ] saoComplementosOrtogonais(reta, plano) => boolean; Igor
 9. - [ ] saoComplementosOrtogonais(plano, reta) => boolean; Mateus
-10.- [ ] formaCartesiana(plano) => [a,b,c,d]  Henrique
-11.- [ ] formaCartesiana(reta) => [[a,b,c,d],[e,f,g,h]]  Melissa
+10. - [ ] formaCartesiana(plano) => [a,b,c,d]  Henrique
+11. - [ ] formaCartesiana(reta) => [[a,b,c,d],[e,f,g,h]]  Melissa
 
