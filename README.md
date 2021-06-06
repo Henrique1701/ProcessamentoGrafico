@@ -25,6 +25,8 @@
 7. - [ ] saoOrtogonais(vetor1, vetor2) => boolean; Evaldo
 8. - [ ] eLI([vetor1, ..., vetorn]) => boolean; Melissa
 
+### Objetos
+
 1. - [x] diretor(reta) => vetor; Melissa
 2. - [ ] normal(plano) => vetor; Evaldo
 3. - [ ] eParalelo(vetor, reta) => boolean; Igor
