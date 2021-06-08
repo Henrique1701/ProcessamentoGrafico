@@ -47,7 +47,7 @@
 4. - [ ] interseção(reta, triangulo) => objeto; Evaldo
 5. - [ ] interseção(plano1, plano2) => objeto; Melissa
 
-Base:
+### Base:
 
 1. - [ ] ortogonalize(base) => (baseOrtogonalizada); Henrique
 2. - [ ] mudeBase(vetor, base) => [x, y, z]; Mateus
