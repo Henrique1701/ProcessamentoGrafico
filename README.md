@@ -9,7 +9,7 @@
 4. - [x] Reta(ponto, vetorDiretor) Mateus
 5. - [x] Plano(ponto, vetorNormal) Henrique
 6. - [x] Esfera(centro, raio) Melissa
-7. - [ ] Triangulo(ponto1, ponto2, ponto3) Evaldo
+7. - [x] Triangulo(ponto1, ponto2, ponto3) Evaldo
 8. - [x] Base(v1, v2, v3)  Igor
 
 ### Funções
@@ -17,12 +17,12 @@
 1. - [x] produtoEscalar(vetor1, vetor2) => n; Henrique
 2. - [x] norma(vetor) => n; Mateus
 3. - [x] normalize(vetor) => vetorNormalizado; Igor
-4. - [ ] cosseno(vetor1, vetor2) => angulo; Evaldo
+4. - [x] cosseno(vetor1, vetor2) => angulo; Evaldo
 5. - [x] projecao(vetor1, vetor2) => vetor3; Melissa
 6. - [x] produtoVetorial(vetor1, vetor2) => vetor3; Henrique
 7. - [x] reflexao(vetor1, vetor2) => vetor3; Mateus
 8. - [x] saoParalelos(vetor1, vetor2) => boolean; Igor
-7. - [ ] saoOrtogonais(vetor1, vetor2) => boolean; Evaldo
+7. - [x] saoOrtogonais(vetor1, vetor2) => boolean; Evaldo
 8. - [ ] eLI([vetor1, ..., vetorn]) => boolean; Melissa
 
 ### Objetos
@@ -39,3 +39,27 @@
 10. - [ ] formaCartesiana(plano) => [a,b,c,d]  Henrique
 11. - [ ] formaCartesiana(reta) => [[a,b,c,d],[e,f,g,h]]  Melissa
 
+### Interseções
+
+1. - [ ] interseção(reta1, reta2) => objeto; Henrique
+2. - [ ] interseção(reta, plano) => objeto; Mateus
+3. - [ ] interseção(reta, esfera) => objeto; Igor
+4. - [ ] interseção(reta, triangulo) => objeto; Evaldo
+5. - [ ] interseção(plano1, plano2) => objeto; Melissa
+
+Base:
+
+1. - [ ] ortogonalize(base) => (baseOrtogonalizada); Henrique
+2. - [ ] mudeBase(vetor, base) => [x, y, z]; Mateus
+3. - [ ] mudeBase([x1, y1, z1], base1, base2) => [x2, y2, z2]; Igor
+
+### Transformações Lineares
+
+1. - [ ] rotação(vetor, ângulo, sentido) => vetorRotacionado; Melissa
+2. - [ ] rotação(vetor, ângulo, sentido, reta) => vetor; Evaldo
+3. - [ ] reflexão(vetor, vetorNormal) => vetor;  Igor
+4. - [ ] reflexão(vetor, vetorDiretor) => vetorRefletido; Mateus
+5. - [ ] reflexão(vetor) => vetorRefletido; Henrique
+6. - [ ] cisalhamento(vetor, eixos, fator) => vetorCisalhado; Melissa
+7. - [ ] cisalhamento(vetor, eixos, fator1, fator2) => vetorCisalhado, Evaldo
+8. - [ ] deformação(vetor, fatorX, fatorY, fatorZ) => vetorDeformado;  Igor
