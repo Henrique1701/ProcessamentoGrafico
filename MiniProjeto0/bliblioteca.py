@@ -77,6 +77,21 @@ class Esfera:
   def getRaio(self):
     return self.raio
 
+class Triangulo:
+  def __init__(self, ponto1: Ponto, ponto2: Ponto, ponto3: Ponto):
+      self.ponto1 = ponto1
+      self.ponto2 = ponto2
+      self.ponto3 = ponto3
+
+  def getTriangulo(self):
+    return self.ponto1.getPonto(), self.ponto2.getPonto(), self.ponto3.getPonto()
+  def getPonto1(self):
+    return self.ponto1.getPonto()
+  def getPonto2(self):
+    return self.ponto2.getPonto() 
+  def getPonto3(self):
+    return self.ponto3.getPonto()
+
 class Base: 
 	def __init__(self, vetor1, vetor2, vetor3):
 		self.vetor1 = vetor1
@@ -105,6 +120,13 @@ def normalize(vetor):
     vetorNormalidado = [x, y, z]
     return vetorNormalidado  
   
+def cosseno(vetor1, vetor2):
+  prodEscalar = produtoEscalar(vetor1, vetor2)
+  normaV1 = norma(vetor1)
+  normaV2 = norma(vetor2)
+  cosseno = (prodEscalar)/(normaV1*normaV2)
+  return cosseno
+
 def projecao(vetor1, vetor2):
     prodEscalar = produtoEscalar(vetor1, vetor2)
     vetorModuloQuadrado = math.pow(norma(vetor2), 2)
@@ -142,6 +164,15 @@ def saoParalelos(vetor1, vetor2):
 	else: 
 		return False 
 
+def saoOrtogonais(vetor1, vetor2):
+  prodEscalar = produtoEscalar(vetor1, vetor2)
+  # Sao ortogonais quando o produto escalar e igual a zero
+  if prodEscalar == 0:
+    return True
+  else:
+    return False
+
+
 ##OBJETOS
 
 def diretor(reta):
@@ -167,3 +198,9 @@ ponto = Ponto(2, -1, 3)
 vetorNormal = Vetor(3, 2, -4)
 plano = Plano(ponto, vetorNormal)
 print(plano.getEqGeral())
+
+
+vetor5 = Vetor(1, 1, 1)
+vetor6 = Vetor(-1, 0, 1)
+print(saoOrtogonais(vetor5, vetor6)) #SaoOrgotonais
+print(cosseno(vetor5, vetor6)) #Cosseno
