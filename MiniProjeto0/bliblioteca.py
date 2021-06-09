@@ -156,7 +156,7 @@ def produtoVetorial(vetor1: Vetor, vetor2: Vetor):
 
 def reflexao(vetor1, vetor2):
     proj12 = projecao(vetor1, vetor2)
-    vetor3 = Vetor(2*proj12.x - vetor1.x, 2*proj12.y - vetor1.y, 2*proj12.z - vetor1.z)
+    vetor3 = Vetor(vetor1.x - 2*proj12.x, vetor1.y - 2*proj12.y, vetor1.z - 2*proj12.z)
     return vetor3
 
 def saoParalelos(vetor1, vetor2):
