@@ -54,16 +54,12 @@ class Plano:
   def __init__(self, ponto: Ponto, vetorNormal: Vetor) -> None:
       self.ponto = ponto
       self.vetorNormal = vetorNormal
-  
-  def getConstante(self):
-    produto1 = self.vetorNormal.getX() * self.ponto.getX()
-    produto2 = self.vetorNormal.getY() * self.ponto.getY()
-    produto3 = self.vetorNormal.getZ() * self.ponto.getZ()
-    return - produto1 - produto2 - produto3
 
-  def getEqGeral(self):
-    #Equação geral do plano: ax+by+cz+d = 0
-    return self.vetorNormal.getX(), self.vetorNormal.getY(), self.vetorNormal.getZ(), self.getConstante()
+  def getPonto(self):
+    return self.ponto
+
+  def getVetorNormal(self):
+    return self.vetorNormal
 
 class Esfera:
   def __init__(self, ponto, raio):
@@ -230,6 +226,13 @@ def saoComplementosOrtogonais(plano, reta):
 	else:
 		return False
 
+def formaCartesiana(plano):
+  produto1 = plano.vetorNormal.getX() * plano.ponto.getX()
+  produto2 = plano.vetorNormal.getY() * plano.ponto.getY()
+  produto3 = plano.vetorNormal.getZ() * plano.ponto.getZ()
+  constante = - produto1 - produto2 - produto3
+  return [plano.vetorNormal.getX(), plano.vetorNormal.getY(), plano.vetorNormal.getZ(), constante]
+
 #TESTES
 vetor1 = Vetor(2, 1, -2)
 vetor2 = Vetor(4, 4, 2)
@@ -249,7 +252,7 @@ print(norma(vetor1), norma(rr))
 ponto = Ponto(2, -1, 3)
 vetorNormal = Vetor(3, 2, -4)
 plano = Plano(ponto, vetorNormal)
-print(plano.getEqGeral())
+print(formaCartesiana(plano))
 
 vetor5 = Vetor(1, 1, 1)
 vetor6 = Vetor(-1, 0, 1)
