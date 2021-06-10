@@ -28,12 +28,12 @@
 ### Objetos
 
 1. - [x] diretor(reta) => vetor; Melissa
-2. - [ ] normal(plano) => vetor; Evaldo
+2. - [x] normal(plano) => vetor; Evaldo
 3. - [ ] eParalelo(vetor, reta) => boolean; Igor
 4. - [ ] eOrtogonal(vetor, plano) => boolean; Mateus
 5. - [x] projecao(vetor, reta) => vetorProjetado; Henrique
 6. - [ ] projecao(vetor, plano) => vetorProjetado; Melissa
-7. - [ ] componenteOrtogonal(vetor, plano) => vetor; Evaldo
+7. - [x] componenteOrtogonal(vetor, plano) => vetor; Evaldo
 8. - [ ] saoComplementosOrtogonais(reta, plano) => boolean; Igor
 9. - [ ] saoComplementosOrtogonais(plano, reta) => boolean; Mateus
 10. - [ ] formaCartesiana(plano) => [a,b,c,d]  Henrique
