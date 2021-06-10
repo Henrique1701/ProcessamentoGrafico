@@ -127,12 +127,26 @@ def cosseno(vetor1, vetor2):
   cosseno = (prodEscalar)/(normaV1*normaV2)
   return cosseno
 
-def projecao(vetor1, vetor2):
-    prodEscalar = produtoEscalar(vetor1, vetor2)
-    vetorModuloQuadrado = math.pow(norma(vetor2), 2)
-    mt = prodEscalar / vetorModuloQuadrado
-    resp = Vetor(vetor2.x*mt, vetor2.y*mt,vetor2.z*mt)
-    return resp
+def projecao(vetor, arg):
+    if isinstance(arg, Vetor):
+      vetor1 = vetor
+      vetor2 = arg
+      prodEscalar = produtoEscalar(vetor1, vetor2)
+      vetorModuloQuadrado = math.pow(norma(vetor2), 2)
+      mt = prodEscalar / vetorModuloQuadrado
+      resp = Vetor(vetor2.x*mt, vetor2.y*mt,vetor2.z*mt)
+      return resp
+    
+    elif isinstance(arg, Reta):
+      reta = arg
+      vetorDiretor = diretor(reta)
+      produtoEscalar1 = produtoEscalar(vetor, vetorDiretor)
+      normaVetorDiretor = norma(vetorDiretor)
+      divisaoProdutoNorma = produtoEscalar1 / (normaVetorDiretor**2)
+      x = vetorDiretor.x * divisaoProdutoNorma
+      y = vetorDiretor.y * divisaoProdutoNorma
+      z = vetorDiretor.z * divisaoProdutoNorma
+      return Vetor(x, y, z)
 
 def produtoVetorial(vetor1: Vetor, vetor2: Vetor):
     x = (vetor1.getY() * vetor2.getZ()) - (vetor1.getZ() * vetor2.getY())
@@ -142,7 +156,7 @@ def produtoVetorial(vetor1: Vetor, vetor2: Vetor):
 
 def reflexao(vetor1, vetor2):
     proj12 = projecao(vetor1, vetor2)
-    vetor3 = Vetor(2*proj12.x - vetor1.x, 2*proj12.y - vetor1.y, 2*proj12.z - vetor1.z)
+    vetor3 = Vetor(vetor1.x - 2*proj12.x, vetor1.y - 2*proj12.y, vetor1.z - 2*proj12.z)
     return vetor3
 
 def saoParalelos(vetor1, vetor2):
@@ -176,8 +190,8 @@ def saoOrtogonais(vetor1, vetor2):
 ##OBJETOS
 
 def diretor(reta):
-    return reta.vetorDiretor
-
+    return reta.vetordiretor
+  
 def normal(plano: Plano):
   # Nao sei se é assim, ta parecendo muito simples
   resp = plano.vetorNormal
@@ -189,6 +203,7 @@ def componenteOrtogonal(vetor, plano):
   vetorOrtogonal = normal(plano) 
   componente = projecao(vetor, vetorOrtogonal)
   return componente
+
 
 #TESTES
 vetor1 = Vetor(2, 1, -2)
@@ -211,10 +226,14 @@ vetorNormal = Vetor(3, 2, -4)
 plano = Plano(ponto, vetorNormal)
 print(plano.getEqGeral())
 
-
 vetor5 = Vetor(1, 1, 1)
 vetor6 = Vetor(-1, 0, 1)
 print(saoOrtogonais(vetor5, vetor6)) #SaoOrgotonais
 print(cosseno(vetor5, vetor6)) #Cosseno
+
+reta = Reta(Ponto(1, 2, 3), Vetor(4, 2, 2))
+p = projecao(Vetor(1, 2, 3), reta) #Projeção vetor na reta
+print(p.getVetor())
+
 print(normal(plano).getVetor()) #Normal do Plano
 print(componenteOrtogonal(vetor5, plano).getVetor()) #ComponenteOrtogonal

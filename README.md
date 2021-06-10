@@ -31,7 +31,7 @@
 2. - [ ] normal(plano) => vetor; Evaldo
 3. - [ ] eParalelo(vetor, reta) => boolean; Igor
 4. - [ ] eOrtogonal(vetor, plano) => boolean; Mateus
-5. - [ ] projecao(vetor, reta) => vetorProjetado; Henrique
+5. - [x] projecao(vetor, reta) => vetorProjetado; Henrique
 6. - [ ] projecao(vetor, plano) => vetorProjetado; Melissa
 7. - [ ] componenteOrtogonal(vetor, plano) => vetor; Evaldo
 8. - [ ] saoComplementosOrtogonais(reta, plano) => boolean; Igor
