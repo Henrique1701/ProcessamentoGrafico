@@ -197,6 +197,15 @@ def normal(plano: Plano):
   resp = plano.vetorNormal
   return resp
 
+def eParalelo(vetor, reta):
+	x = ((vetor.y * reta.vetordiretor.getZ()) - (vetor.z * reta.vetordiretor.getY()))
+	y = ((vetor.z * reta.vetordiretor.getX()) - (vetor.x * reta.vetordiretor.getZ()))
+	z = ((vetor.x * reta.vetordiretor.getY()) - (vetor.y * reta.vetordiretor.getX()))
+	if (x == 0 and y == 0 and z == 0):
+		return True
+	else :
+		return False
+
 def componenteOrtogonal(vetor, plano):
   # Nao sei se é assim, ta parecendo muito simples 2
   # Projecao do vetor no vetor ortogonal do plano
@@ -204,6 +213,22 @@ def componenteOrtogonal(vetor, plano):
   componente = projecao(vetor, vetorOrtogonal)
   return componente
 
+def saoComplementosOrtogonais(plano, reta):
+	x1 = plano.vetorNormal.getX()
+	y1 = plano.vetorNormal.getY()
+	z1 = plano.vetorNormal.getZ()
+
+	x2 = reta.vetordiretor.getX()
+	y2 = reta.vetordiretor.getY()
+	z2 = reta.vetordiretor.getZ()
+
+	vetorP = Vetor(x1, y1, z1)
+	vetorR = Vetor(x2, y2, z2)
+
+	if (saoParalelos(vetorP, vetorR)):
+		return True
+	else:
+		return False
 
 #TESTES
 vetor1 = Vetor(2, 1, -2)
