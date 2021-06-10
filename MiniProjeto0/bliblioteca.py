@@ -177,7 +177,19 @@ def saoOrtogonais(vetor1, vetor2):
 
 def diretor(reta):
     return reta.vetorDiretor
-  
+
+def normal(plano: Plano):
+  # Nao sei se é assim, ta parecendo muito simples
+  resp = plano.vetorNormal
+  return resp
+
+def componenteOrtogonal(vetor, plano):
+  # Nao sei se é assim, ta parecendo muito simples 2
+  # Projecao do vetor no vetor ortogonal do plano
+  vetorOrtogonal = normal(plano) 
+  componente = projecao(vetor, vetorOrtogonal)
+  return componente
+
 #TESTES
 vetor1 = Vetor(2, 1, -2)
 vetor2 = Vetor(4, 4, 2)
@@ -204,3 +216,5 @@ vetor5 = Vetor(1, 1, 1)
 vetor6 = Vetor(-1, 0, 1)
 print(saoOrtogonais(vetor5, vetor6)) #SaoOrgotonais
 print(cosseno(vetor5, vetor6)) #Cosseno
+print(normal(plano).getVetor()) #Normal do Plano
+print(componenteOrtogonal(vetor5, plano).getVetor()) #ComponenteOrtogonal
