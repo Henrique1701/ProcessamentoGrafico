@@ -182,6 +182,40 @@ def saoOrtogonais(vetor1, vetor2):
   else:
     return False
 
+def eLI(vetores):
+
+    if(len(vetores) == 2):
+        paralelismo = saoParalelos(arrayVetores[0], arrayVetores[1])
+    else:
+        paralelismo = saoParalelos(arrayVetores[0], arrayVetores[1]) or saoParalelos(arrayVetores[0], arrayVetores[2]) or saoParalelos(arrayVetores[1], arrayVetores[2])
+
+      #false se tem paralelismo  
+    return not paralelismo
+
+def projecaoPlano(vetor, plano):
+
+  mult = produtoEscalar(vetor, plano.getVetorNormal()) / produtoEscalar(plano.getVetorNormal(), plano.getVetorNormal())
+
+  x = vetor.getX() - (mult * plano.vetorNormal.getX())
+  y = vetor.getY() - (mult * plano.vetorNormal.getY())
+  z = vetor.getZ()- (mult * plano.vetorNormal.getZ())
+  
+  vetorProj = Vetor(x, y, z)
+  
+  return vetorProj.getVetor()
+
+def formaCartesianaReta(reta):
+    a = reta.vetordiretor.getY()/reta.vetordiretor.getX()
+    b = -1
+    c = 0
+    d = reta.ponto.getY() - (a * reta.ponto.getX())
+    e = 0
+    f = reta.vetordiretor.getZ()/reta.vetordiretor.getY()
+    g = -1
+    h = reta.ponto.getZ() - (e * reta.ponto.getY())
+    
+    return [[a, b, c, d], [e, f, g, h]]
+
 
 ##OBJETOS
 
@@ -238,6 +272,8 @@ def formaCartesiana(plano):
   produto3 = plano.vetorNormal.getZ() * plano.ponto.getZ()
   constante = - produto1 - produto2 - produto3
   return [plano.vetorNormal.getX(), plano.vetorNormal.getY(), plano.vetorNormal.getZ(), constante]
+
+
 
 
 #INTERSECOES
@@ -393,4 +429,6 @@ p = projecao(Vetor(1, 2, 3), reta) #Projeção vetor na reta
 print(p.getVetor())
 
 print(normal(plano).getVetor()) #Normal do Plano
-print(componenteOrtogonal(vetor5, plano).getVetor()) #ComponenteOrtogonal
+print(componenteOrtogonal(vetor5, plano).getVetor()) #
+print(projecaoPlano(vetor5, plano))
+print(formaCartesianaReta(reta))
