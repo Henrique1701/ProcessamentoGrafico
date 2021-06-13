@@ -239,7 +239,35 @@ def formaCartesiana(plano):
   constante = - produto1 - produto2 - produto3
   return [plano.vetorNormal.getX(), plano.vetorNormal.getY(), plano.vetorNormal.getZ(), constante]
 
+
 #INTERSECOES
+
+def intersecao(reta1, reta2): # Falta testar, pois falta a função formaCartesiana(reta)
+  #Verifica se tem interseção:
+  formaCartesiana2 = formaCartesiana(reta2)
+  
+  v1 = Vetor(reta1.ponto.x, reta1.ponto.y, reta1.ponto.z)
+  v2 = Vetor(formaCartesiana2[0][0], formaCartesiana2[0][1], formaCartesiana2[0][2])
+  v3 = Vetor(formaCartesiana2[1][0], formaCartesiana2[1][1], formaCartesiana2[1][2])
+
+  produto1 = produtoEscalar(v1, v2) #(p, q, r)*(a, b, c)
+  produto2 = produtoEscalar(v1, v3) #(p, q, r)*(e, f, g)
+  produto3 = produtoEscalar(reta1.vetordiretor, v2) #(x, y, z)*(a, b, c)
+  produto4 = produtoEscalar(reta1.vetordiretor, v3) #(x, y, z)*(e, f, g)
+
+  t1 = (produto1 + formaCartesiana[0][3]) / produto3
+  t2 = (produto2 + formaCartesiana[1][3]) / produto4
+
+  if t1 == t2: #Se t1 == t2, então existe interseção
+    if eParalelo(reta1.vetordiretor, reta2):
+      return vetor1
+    else:
+      x = reta1.ponto.x + (reta1.vetordiretor.x * t1)
+      y = reta1.ponto.y + (reta1.vetordiretor.y * t1)
+      z = reta1.ponto.z + (reta1.vetordiretor.z * t1)
+      return Ponto(x, y, z)
+  else:
+    return None
 
 def intersecao2(reta, plano):
   a = plano.vetorNormal.x
