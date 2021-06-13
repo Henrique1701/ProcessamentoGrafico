@@ -41,7 +41,7 @@
 
 ### Interseções
 
-1. - [ ] interseção(reta1, reta2) => objeto; Henrique
+1. - [X] interseção(reta1, reta2) => objeto; Henrique
 2. - [ ] interseção(reta, plano) => objeto; Mateus
 3. - [ ] interseção(reta, esfera) => objeto; Igor
 4. - [ ] interseção(reta, triangulo) => objeto; Evaldo
