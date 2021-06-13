@@ -202,6 +202,9 @@ def eParalelo(vetor, reta):
 	else :
 		return False
 
+def eOrtogonal(vetor, plano):
+  return saoParalelos(vetor, plano.vetorNormal)
+
 def componenteOrtogonal(vetor, plano):
   # Nao sei se é assim, ta parecendo muito simples 2
   # Projecao do vetor no vetor ortogonal do plano
@@ -209,7 +212,7 @@ def componenteOrtogonal(vetor, plano):
   componente = projecao(vetor, vetorOrtogonal)
   return componente
 
-def saoComplementosOrtogonais(plano, reta):
+def saoComplementosOrtogonais(reta, plano):
 	x1 = plano.vetorNormal.getX()
 	y1 = plano.vetorNormal.getY()
 	z1 = plano.vetorNormal.getZ()
@@ -226,12 +229,110 @@ def saoComplementosOrtogonais(plano, reta):
 	else:
 		return False
 
+def saoComplementosOrtogonais2(plano, reta):
+  return eOrtogonal(reta.vetordiretor, plano)
+
 def formaCartesiana(plano):
   produto1 = plano.vetorNormal.getX() * plano.ponto.getX()
   produto2 = plano.vetorNormal.getY() * plano.ponto.getY()
   produto3 = plano.vetorNormal.getZ() * plano.ponto.getZ()
   constante = - produto1 - produto2 - produto3
   return [plano.vetorNormal.getX(), plano.vetorNormal.getY(), plano.vetorNormal.getZ(), constante]
+
+#INTERSECOES
+
+def intersecao2(reta, plano):
+  a = plano.vetorNormal.x
+  b = plano.vetorNormal.y
+  c = plano.vetorNormal.z
+  d = -1 * produtoEscalar(plano.vetorNormal, Vetor(plano.ponto.x, plano.ponto.y, plano.ponto.z))
+
+  if(produtoEscalar(reta.vetordiretor, plano.vetorNormal) == 0):
+    if(a*reta.ponto.x + b*reta.ponto.y + c*reta.ponto.z + d == 0):
+      return reta
+    else:
+      return None
+
+  t = (-1 * (a*reta.ponto.x + b*reta.ponto.y + c*reta.ponto.z + d)) / (a*reta.vetordiretor.x + b*reta.vetordiretor.y + c*reta.vetordiretor.z)
+
+  return Ponto(reta.ponto.x + t*reta.vetordiretor.x, reta.ponto.y + t*reta.vetordiretor.y, reta.ponto.z + t*reta.vetordiretor.z)
+
+#BASE
+
+def mudeBase(vetor, base):
+  #return (Vetor(vetor.x * base.vetor1.x + vetor.y * base.vetor2.x + vetor.z * base.vetor3.x, vetor.x * base.vetor1.y + vetor.y * base.vetor2.y + vetor.z * base.vetor3.y, vetor.x * base.vetor1.z + vetor.y * base.vetor2.z + vetor.z * base.vetor3.z))
+  v1 = Vetor(base.vetor1.x, base.vetor1.y, base.vetor1.z)
+  v2 = Vetor(base.vetor2.x, base.vetor2.y, base.vetor2.z)
+  v3 = Vetor(base.vetor3.x, base.vetor3.y, base.vetor3.z)
+  v4 = vetor
+
+  if(v1.x == 0):
+    ax1 = v1.x 
+    ax2 = v2.x 
+    ax3 = v3.x 
+    ax4 = v4.x 
+    if(v1.y != 0):
+      v1.x = v1.y
+      v2.x = v2.y
+      v3.x = v3.y
+      v4.x = v4.y
+
+      v1.y = ax1 
+      v2.y = ax2 
+      v3.y = ax3 
+      v4.y = ax4 
+    elif(v1.z != 0):
+      v1.x = v1.z 
+      v2.x = v2.z 
+      v3.x = v3.z
+      v4.x = v4.z 
+
+      v1.z = ax1 
+      v2.z = ax2 
+      v3.z = ax3 
+      v4.z = ax4 
+
+  c = v1.y/v1.x
+  v1.y = v1.y - v1.x*c 
+  v2.y = v2.y - v2.x*c 
+  v3.y = v3.y - v3.x*c 
+  v4.y = v4.y - v4.x*c
+
+  c = v1.z/v1.x
+  v1.z = v1.z - v1.x*c 
+  v2.z = v2.z - v2.x*c 
+  v3.z = v3.z - v3.x*c 
+  v4.z = v4.z - v4.x*c
+
+  if(v2.y == 0):
+    ay2 = v2.y 
+    ay3 = v3.y 
+    ay4 = v4.y 
+
+    v2.y = v2.z 
+    v3.y = v3.z 
+    v4.y = v4.z 
+
+    v2.z = ay2 
+    v3.z = ay3 
+    v4.z = ay4
+
+  c = v2.z/v2.y 
+  v2.z = v2.z - v2.y*c 
+  v3.z = v3.z - v3.y*c
+  v4.z = v4.z - v4.y*c
+
+  c = v4.z/v3.z 
+  b = (v4.y - v3.y*c)/v2.y 
+  a = (v4.x - v3.x*c - v2.x*b)
+
+  return [a, b, c]
+  return [[v1.x, v1.y, v1.z], [v2.x, v2.y, v2.z], [v3.x, v3.y, v3.z]]
+
+#TRANSFORMACOES LINEARES
+
+def reflexao3(vetor, vetorDiretor):
+  return reflexao(vetor, vetorDiretor)
 
 #TESTES
 vetor1 = Vetor(2, 1, -2)
