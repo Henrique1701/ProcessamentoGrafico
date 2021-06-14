@@ -23,43 +23,43 @@
 7. - [x] reflexao(vetor1, vetor2) => vetor3; Mateus
 8. - [x] saoParalelos(vetor1, vetor2) => boolean; Igor
 7. - [x] saoOrtogonais(vetor1, vetor2) => boolean; Evaldo
-8. - [ ] eLI([vetor1, ..., vetorn]) => boolean; Melissa
+8. - [x] eLI([vetor1, ..., vetorn]) => boolean; Melissa
 
 ### Objetos
 
 1. - [x] diretor(reta) => vetor; Melissa
 2. - [x] normal(plano) => vetor; Evaldo
-3. - [ ] eParalelo(vetor, reta) => boolean; Igor
-4. - [ ] eOrtogonal(vetor, plano) => boolean; Mateus
+3. - [x] eParalelo(vetor, reta) => boolean; Igor
+4. - [x] eOrtogonal(vetor, plano) => boolean; Mateus
 5. - [x] projecao(vetor, reta) => vetorProjetado; Henrique
-6. - [ ] projecao(vetor, plano) => vetorProjetado; Melissa
+6. - [x] projecao(vetor, plano) => vetorProjetado; Melissa
 7. - [x] componenteOrtogonal(vetor, plano) => vetor; Evaldo
-8. - [ ] saoComplementosOrtogonais(reta, plano) => boolean; Igor
-9. - [ ] saoComplementosOrtogonais(plano, reta) => boolean; Mateus
+8. - [x] saoComplementosOrtogonais(reta, plano) => boolean; Igor
+9. - [x] saoComplementosOrtogonais(plano, reta) => boolean; Mateus
 10. - [x] formaCartesiana(plano) => [a,b,c,d]  Henrique
-11. - [ ] formaCartesiana(reta) => [[a,b,c,d],[e,f,g,h]]  Melissa
+11. - [x] formaCartesiana(reta) => [[a,b,c,d],[e,f,g,h]]  Melissa
 
 ### Interseções
 
 1. - [X] interseção(reta1, reta2) => objeto; Henrique
-2. - [ ] interseção(reta, plano) => objeto; Mateus
-3. - [ ] interseção(reta, esfera) => objeto; Igor
+2. - [x] interseção(reta, plano) => objeto; Mateus
+3. - [x] interseção(reta, esfera) => objeto; Igor
 4. - [ ] interseção(reta, triangulo) => objeto; Evaldo
 5. - [ ] interseção(plano1, plano2) => objeto; Melissa
 
 ### Base:
 
 1. - [ ] ortogonalize(base) => (baseOrtogonalizada); Henrique
-2. - [ ] mudeBase(vetor, base) => [x, y, z]; Mateus
-3. - [ ] mudeBase([x1, y1, z1], base1, base2) => [x2, y2, z2]; Igor
+2. - [x] mudeBase(vetor, base) => [x, y, z]; Mateus
+3. - [x] REMOVIDA! mudeBase([x1, y1, z1], base1, base2) => [x2, y2, z2]; Igor
 
 ### Transformações Lineares
 
 1. - [ ] rotação(vetor, ângulo, sentido) => vetorRotacionado; Melissa
-2. - [ ] rotação(vetor, ângulo, sentido, reta) => vetor; Evaldo
+2. - [x] rotação(vetor, ângulo, sentido, reta) => vetor; Evaldo
 3. - [ ] reflexão(vetor, vetorNormal) => vetor;  Igor
-4. - [ ] reflexão(vetor, vetorDiretor) => vetorRefletido; Mateus
+4. - [x] reflexão(vetor, vetorDiretor) => vetorRefletido; Mateus
 5. - [ ] reflexão(vetor) => vetorRefletido; Henrique
 6. - [ ] cisalhamento(vetor, eixos, fator) => vetorCisalhado; Melissa
-7. - [ ] cisalhamento(vetor, eixos, fator1, fator2) => vetorCisalhado, Evaldo
+7. - [x] cisalhamento(vetor, eixos, fator1, fator2) => vetorCisalhado, Evaldo
 8. - [ ] deformação(vetor, fatorX, fatorY, fatorZ) => vetorDeformado;  Igor
