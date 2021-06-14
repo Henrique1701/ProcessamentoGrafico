@@ -321,6 +321,59 @@ def intersecao2(reta, plano):
 
   return Ponto(reta.ponto.x + t*reta.vetordiretor.x, reta.ponto.y + t*reta.vetordiretor.y, reta.ponto.z + t*reta.vetordiretor.z)
 
+def intersecao(reta, esfera):
+	xC = esfera.ponto.getX() - reta.ponto.getX()
+	yC = esfera.ponto.getY() - reta.ponto.getY()
+	zC = esfera.ponto.getZ() - reta.ponto.getZ()
+
+	vetorCentro = Vetor(xC, yC, zC)
+	Proj = projecao(vetorCentro, reta)
+	ModulovC = norma(vetorCentro)
+	ModuloProj = norma(Proj)
+
+	D = ((ModulovC ** 2) - (ModuloProj ** 2) ** (1/2))
+
+	r = esfera.getRaio()
+
+	if (D > r):
+		return "Não há intersecao"
+	elif (D == r) :
+		# aT2 + bT + c
+		A = produtoEscalar(reta.vetordiretor, reta.vetordiretor) #Produto Escalar entre os vetores diretores da reta
+		b0 = produtoEscalar(reta.vetordiretor, vetorCentro) #2 vezes o produto escalar de Vd e PC
+		B = b0*2
+		c0 = produtoEscalar(vetorCentro, vetorCentro) # Produto escalar de PC com PC menos o quadrado do raio
+		C = c0 - (esfera.getRaio()**2)
+
+		T1 = (-B/(2*A)) # Só haverá um valor para T, já que o delta será igual a ZERO
+
+		X = reta.ponto.getX() - (T1 * reta.vetordiretor.getX())
+		Y = reta.ponto.getY() - (T1 * reta.vetordiretor.getY())
+		Z = reta.ponto.getZ() - (T1 * reta.vetordiretor.getZ())
+
+		return (X, Y, Z)
+	else :
+		A = produtoEscalar(reta.vetordiretor, reta.vetordiretor)
+		b0 = produtoEscalar(reta.vetordiretor, vetorCentro)
+		B = b0*2
+		c0 = produtoEscalar(vetorCentro, vetorCentro)
+		C = c0 - (esfera.getRaio()**2)
+
+		Delta = ((B**2) - (4*A*C))
+
+		T1 = (-B + (Delta**(1/2)))/(2*A)
+		T2 = (-B - (Delta**(1/2)))/(2*A)
+
+		X1 = reta.ponto.getX() - (T1 * reta.vetordiretor.getX())
+		Y1 = reta.ponto.getY() - (T1 * reta.vetordiretor.getY())
+		Z1 = reta.ponto.getZ() - (T1 * reta.vetordiretor.getZ())
+
+		X2 = reta.ponto.getX() - (T2 * reta.vetordiretor.getX())
+		Y2 = reta.ponto.getY() - (T2 * reta.vetordiretor.getY())
+		Z2 = reta.ponto.getZ() - (T2 * reta.vetordiretor.getZ())
+
+		return ((X1, Y1, Z1) , (X2, Y2, Z2))
+
 #BASE
 
 def mudeBase(vetor, base):
