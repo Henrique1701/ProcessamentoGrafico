@@ -113,7 +113,7 @@ def normalize(vetor):
     x = vetor.x / normaVetor
     y = vetor.y / normaVetor
     z = vetor.z / normaVetor 
-    vetorNormalidado = [x, y, z]
+    vetorNormalidado = Vetor(x, y, z)
     return vetorNormalidado  
   
 def cosseno(vetor1, vetor2):
@@ -443,13 +443,82 @@ def mudeBase(vetor, base):
   b = (v4.y - v3.y*c)/v2.y 
   a = (v4.x - v3.x*c - v2.x*b)
 
-  return [a, b, c]
+  return Vetor(a, b, c)
   return [[v1.x, v1.y, v1.z], [v2.x, v2.y, v2.z], [v3.x, v3.y, v3.z]]
 
 #TRANSFORMACOES LINEARES
 
 def reflexao3(vetor, vetorDiretor):
   return reflexao(vetor, vetorDiretor)
+
+
+def rotacao(vetor: Vetor, angulo, sentido, reta: Reta):
+  # Ideia: Combinar uma mudanca de base com rotacao notoria
+  v: Vetor = reta.vetordiretor
+
+  # nova base orgonormal: precisa de uma nova base com v1, v2 e v3 (tres novos vetores)
+  #v1
+  v1: Vetor = normalize(v) #(v/norma(v))
+
+  #v2
+  if v1.getY() == 0:
+    v2aux = Vetor(0, 1, 0)
+  else:
+    v2aux = Vetor(0, 1, ((-1*v1.getY())/v1.getZ()))
+
+  v2: Vetor = normalize(v2aux) #(v2aux/norma(v2aux))
+
+  #v3
+  v3aux = produtoVetorial(v1, v2)
+  v3: Vetor = normalize(v3aux) #(v3aux/norma(v3aux))
+
+  # rotacoes: tres operacoes rt1, rt2, rt3 feitas atraves de matrizes
+  # operacao 1: 
+  novaBase = Base(v1, v2, v3)
+  rt1: Vetor = mudeBase(vetor, novaBase)
+
+  # operacao 2: rotacao notoria usando a base nova criada; rotacao no eixo X
+  # rt2 = rotação(rt1, angulo, sentido)
+  if sentido == 'AH':
+    xRt2 = rt1.getX()
+    yRt2 = rt1.getY()*math.cos(angulo)-rt1.getZ()*math.sin(angulo)
+    zRt2 = rt1.getY()*math.sin(angulo)+rt1.getZ()*math.cos(angulo)
+    rt2 = Vetor(xRt2, yRt2, zRt2)
+  elif sentido == 'H':
+    xRt2 = rt1.getX()
+    yRt2 = rt1.getY()*math.cos(angulo)+rt1.getZ()*math.sin(angulo)
+    zRt2 = ((-1)*(rt1.getY()*math.sin(angulo)))+rt1.getZ()*math.cos(angulo)
+    rt2 = Vetor(xRt2, yRt2, zRt2)
+
+  # operacao 3: multiplicacao de matriz do vetor rt2 com a matriz formada pelos vetores da novaBase
+  xRt3 = v1.getX()*rt2.getX() + v2.getX()*rt2.getY() + v3.getX()*rt2.getZ()
+  yRt3 = v1.getY()*rt2.getX() + v2.getY()*rt2.getY() + v3.getY()*rt2.getZ()
+  zRt3 = v1.getZ()*rt2.getX() + v2.getZ()*rt2.getY() + v3.getZ()*rt2.getZ()
+  rt3 = Vetor(xRt3, yRt3, zRt3)
+
+  return rt3
+
+
+def cisalhamento(vetor: Vetor, eixos, fator1, fator2):
+  # Fiquei bem confuso com a explicacao de Lucio, mas creio eu que seja assim.
+  # Se tiver algo de errado, so falar :)
+  x0 = vetor.getX()
+  y0 = vetor.getY()
+  z0 = vetor.getZ()
+  a = fator1
+  b = fator2
+
+  if eixos == 'XYZ':
+    resp = Vetor((x0 + a*y0 + b*z0), y0, z0)
+  elif eixos == 'YZX':
+    # Fiquei confuso porque a especificacao colocou YZX.
+    # Caso seja YXZ a resposta seria resp = Vetor(x0, (y0 + a*x0 + b*z0), z0)
+    resp = Vetor(x0, (y0 + a*z0 + b*x0), z0)
+  elif eixos == 'ZXY':
+    resp = Vetor(x0, y0, (z0 + a*x0 + b*y0))
+
+  return resp
+
 
 #TESTES
 vetor1 = Vetor(2, 1, -2)
@@ -482,6 +551,8 @@ p = projecao(Vetor(1, 2, 3), reta) #Projeção vetor na reta
 print(p.getVetor())
 
 print(normal(plano).getVetor()) #Normal do Plano
-print(componenteOrtogonal(vetor5, plano).getVetor()) #
+print(componenteOrtogonal(vetor5, plano).getVetor()) #Componente Orgotogal
 print(projecaoPlano(vetor5, plano))
 print(formaCartesianaReta(reta))
+print(cisalhamento(vetor5, 'XYZ', 1, 1).getVetor()) #Cisalhamento 2 fatores
+print(rotacao(vetor5, math.radians(180), 'H', reta).getVetor()) #Rotacao arbitraria
