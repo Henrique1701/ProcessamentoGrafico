@@ -695,5 +695,5 @@ vetorBase = Vetor(6, 3, 9)
 BaseA = Base(Vetor(1, 1, 1), Vetor(-1, 1, 0), Vetor(1, 0, -1))
 BaseO = Base(Vetor(1, 0, 0), Vetor(0, 1, 0), Vetor(0, 0, 1))
 
-print(mudeBase(vetorBase, BaseO, BaseA))
+print(mudeBase2(vetorBase, BaseO, BaseA))
 
