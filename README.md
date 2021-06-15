@@ -45,7 +45,7 @@
 2. - [x] interseção(reta, plano) => objeto; Mateus
 3. - [x] interseção(reta, esfera) => objeto; Igor
 4. - [ ] interseção(reta, triangulo) => objeto; Evaldo
-5. - [ ] interseção(plano1, plano2) => objeto; Melissa
+5. - [x] interseção(plano1, plano2) => objeto; Melissa
 
 ### Base:
 
