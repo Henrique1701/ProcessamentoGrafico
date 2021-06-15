@@ -374,7 +374,33 @@ def intersecao(reta, esfera):
 
 		return ((X1, Y1, Z1) , (X2, Y2, Z2))
 
+
 #BASE
+
+def ortogonalize(base: Base):
+  v1 : Vetor = base.vetor1
+  v2 : Vetor = base.vetor2
+  v3 : Vetor = base.vetor3
+
+  vAux = Vetor(0, 0, 0)
+
+  vProj = projecao(v2, v1)
+  v2.x = v2.x - vProj.x
+  v2.y = v2.y - vProj.y
+  v2.z = v2.z - vProj.z
+
+  vAux = v3
+  vProj = projecao(vAux, v1)
+  v3.x = v3.x - vProj.x
+  v3.y = v3.y - vProj.y
+  v3.z = v3.z - vProj.z
+  vProj = projecao(vAux, v2)
+  v3.x = vAux.x - vProj.x
+  v3.y = vAux.y - vProj.y
+  v3.z = vAux.z - vProj.z
+
+  return Base(v1, v2, v3)
+
 
 def mudeBase(vetor, base):
   #return (Vetor(vetor.x * base.vetor1.x + vetor.y * base.vetor2.x + vetor.z * base.vetor3.x, vetor.x * base.vetor1.y + vetor.y * base.vetor2.y + vetor.z * base.vetor3.y, vetor.x * base.vetor1.z + vetor.y * base.vetor2.z + vetor.z * base.vetor3.z))
@@ -556,3 +582,6 @@ print(projecaoPlano(vetor5, plano))
 print(formaCartesianaReta(reta))
 print(cisalhamento(vetor5, 'XYZ', 1, 1).getVetor()) #Cisalhamento 2 fatores
 print(rotacao(vetor5, math.radians(180), 'H', reta).getVetor()) #Rotacao arbitraria
+
+base1 = Base(Vetor(0, 0, 1), Vetor(0, 1, 1), Vetor(1, 1, 1))
+print(ortogonalize(base1).getBase())
