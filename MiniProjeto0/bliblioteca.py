@@ -477,6 +477,13 @@ def mudeBase(vetor, base):
 def reflexao3(vetor, vetorDiretor):
   return reflexao(vetor, vetorDiretor)
 
+def reflexao4(vetor: Vetor):
+  # Matriz de reflexão em relação a origem:
+  # -1  0  0
+  #  0 -1  0
+  #  0  0 -1
+  return Vetor(vetor.x * (-1), vetor.y * (-1), vetor.z * (-1))
+
 
 def rotacao(vetor: Vetor, angulo, sentido, reta: Reta):
   # Ideia: Combinar uma mudanca de base com rotacao notoria
