@@ -356,7 +356,7 @@ def intersecao(reta, esfera):
 		Y = reta.ponto.getY() - (T1 * reta.vetordiretor.getY())
 		Z = reta.ponto.getZ() - (T1 * reta.vetordiretor.getZ())
 
-		return (X, Y, Z)
+		return Ponto(X, Y, Z)
 	else :
 		A = produtoEscalar(reta.vetordiretor, reta.vetordiretor)
 		b0 = produtoEscalar(reta.vetordiretor, vetorCentro)
@@ -377,7 +377,7 @@ def intersecao(reta, esfera):
 		Y2 = reta.ponto.getY() - (T2 * reta.vetordiretor.getY())
 		Z2 = reta.ponto.getZ() - (T2 * reta.vetordiretor.getZ())
 
-		return ((X1, Y1, Z1) , (X2, Y2, Z2))
+		return (Ponto(X1, Y1, Z1) , Ponto(X2, Y2, Z2))
   
 
 def intersecaoPlano(plano1, plano2):
@@ -539,6 +539,32 @@ def mudeBase(vetor, base):
 
 
 #TRANSFORMACOES LINEARES
+
+def reflexao2(vetor, vetornormal):
+	x = vetornormal.x
+	y = vetornormal.y
+	z = vetornormal.z
+
+	if (x == 0 and y == 0):
+		#Plano XoY
+		# 1  0  0
+  		# 0  1  0
+  		# 0  0 -1
+  		return Vetor(vetor.x * (1), vetor.y * (1), vetor.z * (-1))
+
+	elif (y == 0 and z == 0):
+		#Plano YoZ
+  		#-1  0  0
+  		# 0  1  0
+  		# 0  0  1
+  		return Vetor(vetor.x * (-1), vetor.y * (1), vetor.z * (1))
+
+	elif (x == 0 and z == 0):
+  		#Plano XoZ
+  		# 1  0  0
+  		# 0 -1  0
+  		# 0  0  1
+  		return Vetor(vetor.x * (1), vetor.y * (-1), vetor.z * (1))
 
 def reflexao3(vetor, vetorDiretor):
   return reflexao(vetor, vetorDiretor)
