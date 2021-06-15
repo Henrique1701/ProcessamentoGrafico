@@ -472,6 +472,23 @@ def mudeBase(vetor, base):
   return Vetor(a, b, c)
   return [[v1.x, v1.y, v1.z], [v2.x, v2.y, v2.z], [v3.x, v3.y, v3.z]]
 
+
+def mudeBase2(vetorBase1, base1, base2):
+	import numpy as np
+	from numpy.linalg import solve
+
+	A = np.array([[base2.vetor1.getX(), base2.vetor2.getX(), base2.vetor3.getX()],
+		[base2.vetor1.getY(), base2.vetor2.getY(), base2.vetor3.getY()],
+		[base2.vetor1.getZ(), base2.vetor2.getZ(), base2.vetor3.getZ()]])
+	B = np.array([vetorBase1.x, vetorBase1.y, vetorBase1.z])
+	x = solve(A,B)
+	return x
+    
+    
+#	X = ax1 + bx2 + cx3
+#	Y = ay1 + by2 + cy3
+#	Z = az1 + bz2 + cz3	
+
 #TRANSFORMACOES LINEARES
 
 def reflexao3(vetor, vetorDiretor):
@@ -612,3 +629,13 @@ print(rotacao(vetor5, math.radians(180), 'H', reta).getVetor()) #Rotacao arbitra
 
 base1 = Base(Vetor(0, 0, 1), Vetor(0, 1, 1), Vetor(1, 1, 1))
 print(ortogonalize(base1).getBase())
+
+#Teste mudança de base
+vetorBase = Vetor(6, 3, 9)
+
+BaseA = Base(Vetor(1, 1, 1), Vetor(-1, 1, 0), Vetor(1, 0, -1))
+BaseO = Base(Vetor(1, 0, 0), Vetor(0, 1, 0), Vetor(0, 0, 1))
+
+print(mudeBase(vetorBase, BaseO, BaseA))
+
+
