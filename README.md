@@ -49,7 +49,7 @@
 
 ### Base:
 
-1. - [ ] ortogonalize(base) => (baseOrtogonalizada); Henrique
+1. - [x] ortogonalize(base) => (baseOrtogonalizada); Henrique
 2. - [x] mudeBase(vetor, base) => [x, y, z]; Mateus
 3. - [x] REMOVIDA! mudeBase([x1, y1, z1], base1, base2) => [x2, y2, z2]; Igor
 
