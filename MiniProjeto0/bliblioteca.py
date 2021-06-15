@@ -50,11 +50,16 @@ class Reta:
       self.ponto = ponto
       self.vetordiretor = vetordiretor
 
+  def getReta(self):
+    return self.ponto.getPonto(), self.vetordiretor.getVetor()
+
 class Plano:
   def __init__(self, ponto: Ponto, vetorNormal: Vetor) -> None:
       self.ponto = ponto
       self.vetorNormal = vetorNormal
 
+  def getPlano(self):
+    return self.ponto.getPonto(), self.vetorNormal.getVetor()
   def getPonto(self):
     return self.ponto
 
@@ -373,6 +378,50 @@ def intersecao(reta, esfera):
 		Z2 = reta.ponto.getZ() - (T2 * reta.vetordiretor.getZ())
 
 		return ((X1, Y1, Z1) , (X2, Y2, Z2))
+  
+
+def intersecaoPlano(plano1, plano2):
+
+  vd = Vetor (plano1.ponto.x - plano2.ponto.x, plano1.ponto.y - plano2.ponto.y, plano1.ponto.z - plano2.ponto.z)
+  reta = Reta(plano1.ponto, vd)
+
+#verifica se é paralelo
+
+  if saoParalelos(plano1.vetorNormal, plano2.vetorNormal):
+      if type(intersecao2(reta, plano1)) is Ponto:
+        #nao esta contido, nao retorna nada
+        return "Sem retorno"
+      else:
+        #esta contido, retorna o proprio plano
+        return plano1
+  else:
+
+    p = formaCartesiana(plano1)
+    q = formaCartesiana(plano2)
+    #0=a, 1=b, 2=c, 3=d
+    #0=e, 1=f, 2=g, 3=h
+
+    #x = 0
+    #y = ch - dg / bg - cf
+    #z = (((-f)ch + fdg / bg - cf) - h) / g
+
+    if p[1] == 0:
+      y = ((p[1]*q[3]) - (p[3]*q[2])) / ((p[2]*q[2]) - (p[1]*q[1]))
+    else:
+      y = ((p[2]*q[3]) - (p[3]*q[2])) / ((p[1]*q[2]) - (p[2]*q[1]))
+
+    if q[2] == 0:
+      z = ((((((-q[2])*p[2]*q[3]) + (q[2]*p[3]*q[1])) / (p[1]*q[1]) - (p[2]*q[2])) - q[3]) / q[1])
+    else:
+      z = ((((((-q[1])*p[2]*q[3]) + (q[1]*p[3]*q[2])) / (p[1]*q[2]) - (p[2]*q[1])) - q[3]) / q[2])
+
+    x = 0
+    ponto = Ponto(x,y,z)
+    vt = produtoVetorial(plano1.vetorNormal, plano2.vetorNormal)
+    return Reta(ponto, vt)
+
+
+
 
 
 #BASE
@@ -472,22 +521,22 @@ def mudeBase(vetor, base):
   return Vetor(a, b, c)
   return [[v1.x, v1.y, v1.z], [v2.x, v2.y, v2.z], [v3.x, v3.y, v3.z]]
 
+  def mudeBase2(vetorBase1, base1, base2):
+    import numpy as np
+    from numpy.linalg import solve
 
-def mudeBase2(vetorBase1, base1, base2):
-	import numpy as np
-	from numpy.linalg import solve
+    A = np.array([[base2.vetor1.getX(), base2.vetor2.getX(), base2.vetor3.getX()],
+      [base2.vetor1.getY(), base2.vetor2.getY(), base2.vetor3.getY()],
+      [base2.vetor1.getZ(), base2.vetor2.getZ(), base2.vetor3.getZ()]])
+    B = np.array([vetorBase1.x, vetorBase1.y, vetorBase1.z])
+    x = solve(A,B)
+    return x
 
-	A = np.array([[base2.vetor1.getX(), base2.vetor2.getX(), base2.vetor3.getX()],
-		[base2.vetor1.getY(), base2.vetor2.getY(), base2.vetor3.getY()],
-		[base2.vetor1.getZ(), base2.vetor2.getZ(), base2.vetor3.getZ()]])
-	B = np.array([vetorBase1.x, vetorBase1.y, vetorBase1.z])
-	x = solve(A,B)
-	return x
-    
-    
+
 #	X = ax1 + bx2 + cx3
 #	Y = ay1 + by2 + cy3
 #	Z = az1 + bz2 + cz3	
+
 
 #TRANSFORMACOES LINEARES
 
@@ -556,12 +605,20 @@ def cisalhamento(vetor: Vetor, eixos, fator):
   z0 = vetor.getZ()
   a = fator
 
-  if eixos == 'XYZ':
+#“XY”, “XZ”, “YX”, “YZ”, “ZX” ou “ZY”
+
+  if eixos == 'XY':
     resp = Vetor((x0 + a*y0), y0, z0)
-  elif eixos == 'YZX':
+  elif eixos == 'XZ':
+    resp = Vetor((x0 + a*z0), y0, z0)
+  elif eixos == 'YX':
+    resp = Vetor(x0, (y0 + a*x0), z0)
+  elif eixos == 'YZ':
     resp = Vetor(x0, (y0 + a*z0), z0)
-  elif eixos == 'ZXY':
+  elif eixos == 'ZX':
     resp = Vetor(x0, y0, (z0 + a*x0))
+  elif eixos == 'ZY':
+    resp = Vetor(x0, y0, (z0 + a*y0))
 
   return resp
 
@@ -608,6 +665,7 @@ print(norma(vetor1), norma(rr))
 ponto = Ponto(2, -1, 3)
 vetorNormal = Vetor(3, 2, -4)
 plano = Plano(ponto, vetorNormal)
+plano2 = Plano(Ponto(2, -1, 3), Vetor(1, 3, -2))
 print(formaCartesiana(plano))
 
 vetor5 = Vetor(1, 1, 1)
@@ -624,11 +682,12 @@ print(componenteOrtogonal(vetor5, plano).getVetor()) #Componente Orgotogal
 print(projecaoPlano(vetor5, plano))
 print(formaCartesianaReta(reta))
 print(cisalhamento2(vetor5, 'XYZ', 1, 1).getVetor()) #Cisalhamento 2 fatores
-print(cisalhamento(vetor5, 'XYZ', 1).getVetor())
+print(cisalhamento(vetor5, 'XY', 1).getVetor())
 print(rotacao(vetor5, math.radians(180), 'H', reta).getVetor()) #Rotacao arbitraria
 
 base1 = Base(Vetor(0, 0, 1), Vetor(0, 1, 1), Vetor(1, 1, 1))
 print(ortogonalize(base1).getBase())
+print(intersecaoPlano(plano, plano2).getReta())
 
 #Teste mudança de base
 vetorBase = Vetor(6, 3, 9)
@@ -637,5 +696,4 @@ BaseA = Base(Vetor(1, 1, 1), Vetor(-1, 1, 0), Vetor(1, 0, -1))
 BaseO = Base(Vetor(1, 0, 0), Vetor(0, 1, 0), Vetor(0, 0, 1))
 
 print(mudeBase(vetorBase, BaseO, BaseA))
-
 
