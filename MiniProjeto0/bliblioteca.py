@@ -532,7 +532,23 @@ def rotacao(vetor: Vetor, angulo, sentido, reta: Reta):
   return rt3
 
 
-def cisalhamento(vetor: Vetor, eixos, fator1, fator2):
+
+def cisalhamento(vetor: Vetor, eixos, fator):
+  x0 = vetor.getX()
+  y0 = vetor.getY()
+  z0 = vetor.getZ()
+  a = fator
+
+  if eixos == 'XYZ':
+    resp = Vetor((x0 + a*y0), y0, z0)
+  elif eixos == 'YZX':
+    resp = Vetor(x0, (y0 + a*z0), z0)
+  elif eixos == 'ZXY':
+    resp = Vetor(x0, y0, (z0 + a*x0))
+
+  return resp
+
+def cisalhamento2(vetor: Vetor, eixos, fator1, fator2):
   # Fiquei bem confuso com a explicacao de Lucio, mas creio eu que seja assim.
   # Se tiver algo de errado, so falar :)
   x0 = vetor.getX()
@@ -590,7 +606,8 @@ print(normal(plano).getVetor()) #Normal do Plano
 print(componenteOrtogonal(vetor5, plano).getVetor()) #Componente Orgotogal
 print(projecaoPlano(vetor5, plano))
 print(formaCartesianaReta(reta))
-print(cisalhamento(vetor5, 'XYZ', 1, 1).getVetor()) #Cisalhamento 2 fatores
+print(cisalhamento2(vetor5, 'XYZ', 1, 1).getVetor()) #Cisalhamento 2 fatores
+print(cisalhamento(vetor5, 'XYZ', 1).getVetor())
 print(rotacao(vetor5, math.radians(180), 'H', reta).getVetor()) #Rotacao arbitraria
 
 base1 = Base(Vetor(0, 0, 1), Vetor(0, 1, 1), Vetor(1, 1, 1))
