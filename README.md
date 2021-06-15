@@ -62,4 +62,4 @@
 5. - [x] reflexão(vetor) => vetorRefletido; Henrique
 6. - [ ] cisalhamento(vetor, eixos, fator) => vetorCisalhado; Melissa
 7. - [x] cisalhamento(vetor, eixos, fator1, fator2) => vetorCisalhado, Evaldo
-8. - [ ] deformação(vetor, fatorX, fatorY, fatorZ) => vetorDeformado;  Igor
+8. - [x] deformação(vetor, fatorX, fatorY, fatorZ) => vetorDeformado;  Igor
