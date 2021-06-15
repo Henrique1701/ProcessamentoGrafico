@@ -552,6 +552,9 @@ def cisalhamento(vetor: Vetor, eixos, fator1, fator2):
 
   return resp
 
+def deformacao(vetor: Vetor, fatorX, fatorY, fatorZ):
+  return Vetor(vetor.x * fatorX, vetor.y * fatorY, vetor.z * fatorZ)
+
 
 #TESTES
 vetor1 = Vetor(2, 1, -2)
