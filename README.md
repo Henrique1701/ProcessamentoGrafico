@@ -59,7 +59,7 @@
 2. - [x] rotação(vetor, ângulo, sentido, reta) => vetor; Evaldo
 3. - [ ] reflexão(vetor, vetorNormal) => vetor;  Igor
 4. - [x] reflexão(vetor, vetorDiretor) => vetorRefletido; Mateus
-5. - [ ] reflexão(vetor) => vetorRefletido; Henrique
+5. - [x] reflexão(vetor) => vetorRefletido; Henrique
 6. - [ ] cisalhamento(vetor, eixos, fator) => vetorCisalhado; Melissa
 7. - [x] cisalhamento(vetor, eixos, fator1, fator2) => vetorCisalhado, Evaldo
 8. - [ ] deformação(vetor, fatorX, fatorY, fatorZ) => vetorDeformado;  Igor
