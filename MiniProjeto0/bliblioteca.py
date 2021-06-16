@@ -87,11 +87,11 @@ class Triangulo:
   def getTriangulo(self):
     return self.ponto1.getPonto(), self.ponto2.getPonto(), self.ponto3.getPonto()
   def getPonto1(self):
-    return self.ponto1.getPonto()
+    return self.ponto1
   def getPonto2(self):
-    return self.ponto2.getPonto() 
+    return self.ponto2 
   def getPonto3(self):
-    return self.ponto3.getPonto()
+    return self.ponto3
 
 class Base: 
 	def __init__(self, vetor1, vetor2, vetor3):
@@ -210,6 +210,7 @@ def projecaoPlano(vetor, plano):
   return vetorProj.getVetor()
 
 def formaCartesianaReta(reta):
+  try:
     a = reta.vetordiretor.getY()/reta.vetordiretor.getX()
     b = -1
     c = 0
@@ -218,8 +219,9 @@ def formaCartesianaReta(reta):
     f = reta.vetordiretor.getZ()/reta.vetordiretor.getY()
     g = -1
     h = reta.ponto.getZ() - (e * reta.ponto.getY())
-    
     return [[a, b, c, d], [e, f, g, h]]
+  except ZeroDivisionError:
+    print('Erro por divisao por zero')
 
 
 ##OBJETOS
@@ -285,7 +287,7 @@ def formaCartesiana(plano):
 
 def intersecao(reta1, reta2): # Falta testar, pois falta a função formaCartesiana(reta)
   #Verifica se tem interseção:
-  formaCartesiana2 = formaCartesiana(reta2)
+  formaCartesiana2 = formaCartesianaReta(reta2)
   
   v1 = Vetor(reta1.ponto.x, reta1.ponto.y, reta1.ponto.z)
   v2 = Vetor(formaCartesiana2[0][0], formaCartesiana2[0][1], formaCartesiana2[0][2])
@@ -296,8 +298,8 @@ def intersecao(reta1, reta2): # Falta testar, pois falta a função formaCartesi
   produto3 = produtoEscalar(reta1.vetordiretor, v2) #(x, y, z)*(a, b, c)
   produto4 = produtoEscalar(reta1.vetordiretor, v3) #(x, y, z)*(e, f, g)
 
-  t1 = (produto1 + formaCartesiana[0][3]) / produto3
-  t2 = (produto2 + formaCartesiana[1][3]) / produto4
+  t1 = (produto1 + formaCartesiana2[0][3]) / produto3
+  t2 = (produto2 + formaCartesiana2[1][3]) / produto4
 
   if t1 == t2: #Se t1 == t2, então existe interseção
     if eParalelo(reta1.vetordiretor, reta2):
@@ -326,7 +328,7 @@ def intersecao2(reta, plano):
 
   return Ponto(reta.ponto.x + t*reta.vetordiretor.x, reta.ponto.y + t*reta.vetordiretor.y, reta.ponto.z + t*reta.vetordiretor.z)
 
-def intersecao(reta, esfera):
+def intersecao3(reta, esfera):
 	xC = esfera.ponto.getX() - reta.ponto.getX()
 	yC = esfera.ponto.getY() - reta.ponto.getY()
 	zC = esfera.ponto.getZ() - reta.ponto.getZ()
@@ -378,7 +380,119 @@ def intersecao(reta, esfera):
 		Z2 = reta.ponto.getZ() - (T2 * reta.vetordiretor.getZ())
 
 		return (Ponto(X1, Y1, Z1) , Ponto(X2, Y2, Z2))
+
+def intersecao4(reta: Reta, triangulo: Triangulo):
+  A: Ponto = triangulo.getPonto1()
+  B: Ponto = triangulo.getPonto2()
+  C: Ponto = triangulo.getPonto3()
+  vetorAB = Vetor(B.getX()-A.getX(), B.getY()-A.getY(), B.getZ()-A.getZ())
+  vetorAC = Vetor(C.getX()-A.getX(), C.getY()-A.getY(), C.getZ()-A.getZ())
+  vetorBC = Vetor(C.getX()-B.getX(), C.getY()-B.getY(), C.getZ()-B.getZ())
+  vetorNormalPlano = produtoVetorial(vetorAB, vetorAC)
+  # 1 - criar um plano a partir do triangulo
+  planoTriangulo = Plano(A, vetorNormalPlano)
+
+  # 2 - intersecao da reta com o plano do triangulo  
+  pontoIntersec = intersecao2(reta, planoTriangulo)
   
+  # 1 passo: reta paralela ao triangulo SEM estar contida
+  # chamada da funcao de intersecao da reta com o plano, se for None é paralelo e nao ta contido, entao nao tem intersecao.
+  if pontoIntersec == None:
+    return None # nao tem intersecao
+
+  # 2 passo: reta paralela ao triangulo CONTIDA no plano do triangulo
+  elif pontoIntersec == reta:
+    # verificar se a reta intersecta alguma das 3 retas feitas a partir dos lados do triangulo
+    ponto1 = intersecao(reta, Reta(A, vetorAC))
+    ponto2 = intersecao(reta, Reta(B, vetorBC))
+    ponto3 = intersecao(reta, Reta(A, vetorAB))
+
+    if isinstance(ponto1, Reta):
+      return Segmento(A, C)
+    elif isinstance(ponto2, Reta):
+      return Segmento(B, C)
+    elif isinstance(ponto3, Reta):
+      return Segmento(A, B)
+    elif isinstance(ponto1, Ponto) and isinstance(ponto2, Ponto) and isinstance(ponto3, Ponto):
+      # se todos forem pontos
+      vetorAP = Vetor(ponto1.getX()-A.getX(), ponto1.getY()-A.getY(), ponto1.getZ()-A.getZ())
+      vetorBP = Vetor(ponto2.getX()-B.getX(), ponto2.getY()-B.getY(), ponto2.getZ()-B.getZ())
+      vetorAP2 = Vetor(ponto3.getX()-A.getX(), ponto3.getY()-A.getY(), ponto3.getZ()-A.getZ())
+
+      t1 = norma(vetorAP)/norma(vetorAC)
+      t2 = norma(vetorBP)/norma(vetorBC)
+      t3 = norma(vetorAP2)/norma(vetorAB)
+
+      if 0 < t1 < 1 and 0 < t2 < 1:
+        return Segmento(ponto1, ponto2)
+      elif 0 < t1 < 1 and 0 < t3 < 1:
+        return Segmento(ponto1, ponto3)
+      elif 0 < t2 < 1 and 0 < t3 < 1:
+        return Segmento(ponto2, ponto3)
+      else:
+        return None
+    else:
+      # quando tem APENAS UM NONE: é paralelo e nao esta contido na propria reta
+      if ponto1 == None:
+        vetorBP = Vetor(ponto2.getX()-B.getX(), ponto2.getY()-B.getY(), ponto2.getZ()-B.getZ())
+        vetorAP2 = Vetor(ponto3.getX()-A.getX(), ponto3.getY()-A.getY(), ponto3.getZ()-A.getZ())
+        t2 = norma(vetorBP)/norma(vetorBC)
+        t3 = norma(vetorAP2)/norma(vetorAB)
+        if 0 < t2 < 1 and 0 < t3 < 1:
+          return Segmento(ponto2, ponto3)
+        else:
+          return None
+      elif ponto2 == None:
+        vetorAP = Vetor(ponto1.getX()-A.getX(), ponto1.getY()-A.getY(), ponto1.getZ()-A.getZ())
+        vetorAP2 = Vetor(ponto3.getX()-A.getX(), ponto3.getY()-A.getY(), ponto3.getZ()-A.getZ())
+        t1 = norma(vetorAP)/norma(vetorAC)
+        t3 = norma(vetorAP2)/norma(vetorAB)
+        if 0 < t1 < 1 and 0 < t3 < 1:
+          return Segmento(ponto1, ponto3)
+        else:
+          return None
+      elif ponto3 == None:
+        vetorAP = Vetor(ponto1.getX()-A.getX(), ponto1.getY()-A.getY(), ponto1.getZ()-A.getZ())
+        vetorBP = Vetor(ponto2.getX()-B.getX(), ponto2.getY()-B.getY(), ponto2.getZ()-B.getZ())
+        t1 = norma(vetorAP)/norma(vetorAC)
+        t2 = norma(vetorBP)/norma(vetorBC)
+        if 0 < t1 < 1 and 0 < t2 < 1:
+          return Segmento(ponto1, ponto2)
+        else:
+          return None
+
+  # 3 passo: 3 verificacoes para saber se o ponto de intersecao passa pelo o triangulo ou nao
+  else:
+    # 1 verificacao
+    vetorAD = Vetor(pontoIntersec.getX()-A.getX(), pontoIntersec.getY()-A.getY(), pontoIntersec.getZ()-A.getZ())
+    proj1 = projecao(vetorAB, vetorAC)
+    proj2 = projecao(vetorAD, vetorAC)
+    BLinhaB =  Vetor(vetorAB.getX()-proj1.getX(), vetorAB.getY()-proj1.getY(), vetorAB.getZ()-proj1.getZ())
+    DLinhaD =  Vetor(vetorAD.getX()-proj2.getX(), vetorAD.getY()-proj2.getY(), vetorAD.getZ()-proj2.getZ())
+    
+    if produtoEscalar(BLinhaB, DLinhaD) < 0:
+      return None # nao tem intersecao
+    else:
+      # 2 verificacao
+      proj3 = projecao(vetorAC, vetorAB)
+      proj4 = projecao(vetorAD, vetorAB)
+      CLinhaC =  Vetor(vetorAC.getX()-proj3.getX(), vetorAC.getY()-proj3.getY(), vetorAC.getZ()-proj3.getZ())
+      DLinhaD2 =  Vetor(vetorAD.getX()-proj4.getX(), vetorAD.getY()-proj4.getY(), vetorAD.getZ()-proj4.getZ())
+      if produtoEscalar(CLinhaC, DLinhaD2) < 0:
+        return None # nao tem intersecao
+      else:
+        # 3 verificacao
+        vetorCA = Vetor(A.getX()-C.getX(), A.getY()-C.getY(), A.getZ()-C.getZ())
+        vetorCB = Vetor(B.getX()-C.getX(), B.getY()-C.getY(), B.getZ()-C.getZ())
+        vetorCD = Vetor(pontoIntersec.getX()-C.getX(), pontoIntersec.getY()-C.getY(), pontoIntersec.getZ()-C.getZ())
+        proj5 = projecao(vetorCA, vetorCB)
+        proj6 = projecao(vetorCD, vetorCB)
+        ALinhaA =  Vetor(vetorCA.getX()-proj5.getX(), vetorCA.getY()-proj5.getY(), vetorCA.getZ()-proj5.getZ())
+        DLinhaD3 =  Vetor(vetorCD.getX()-proj6.getX(), vetorCD.getY()-proj6.getY(), vetorCD.getZ()-proj6.getZ())
+        if produtoEscalar(ALinhaA, DLinhaD3) < 0:
+          return None # nao tem intersecao
+        else:
+          return pontoIntersec # finalmente a resposta!!!!!!
 
 def intersecaoPlano(plano1, plano2):
 
@@ -721,5 +835,5 @@ vetorBase = Vetor(6, 3, 9)
 BaseA = Base(Vetor(1, 1, 1), Vetor(-1, 1, 0), Vetor(1, 0, -1))
 BaseO = Base(Vetor(1, 0, 0), Vetor(0, 1, 0), Vetor(0, 0, 1))
 
-print(mudeBase2(vetorBase, BaseO, BaseA))
-
+#print(mudeBase2(vetorBase, BaseO, BaseA))
+print(intersecao4(Reta(Ponto(1, 1, 1), Vetor(1, 1, 1)), Triangulo(Ponto(1, 1, 1), Ponto(2, 2, 2), Ponto(2, 1, 1))))
