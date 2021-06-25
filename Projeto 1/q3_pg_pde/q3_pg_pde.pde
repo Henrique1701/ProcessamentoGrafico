@@ -11,6 +11,6 @@ void draw() {
   translate(400, 400);
   scale(1,-1);
   rotate(alpha);
-  point(x * alpha/PI, y);
+  point(x * (1 + alpha/PI), y);
   alpha += PI/120;
 }
