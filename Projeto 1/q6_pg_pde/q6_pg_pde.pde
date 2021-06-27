@@ -18,11 +18,32 @@ void setup() {
 
 void draw() {
   translate(400,400, 0);
-  background(200);
-  strokeWeight(4);
+  scale(1,-1,1);
+  background(255);
+  rotateX(PI/1.8);
+  //rotateY(PI/10);
+  rotateZ(PI);
+  rotateZ(PI/4);
+  rotateY(PI); 
+  rotateZ(-PI/4);
+  rotateY(PI/10); 
+  rotateZ(PI/8);
+  //essas primeiras rotacoes foram apenas para mudar a perspectiva do espaço, talvez alguem queira mudar para deixar mais parecido com a imagem no enunciado
+  
+  stroke(255, 0, 0);
+  line(0,0,0,300,0,0);
+  stroke(0, 255, 0);
+  line(0,0,0,0,300,0);
+  stroke(0, 0, 255);
+  line(0,0,0,0,0,300);
+  stroke(0);
+  strokeWeight(5);
   circle(0,0,5);
   rotateX(PI/3);
+  fill(255);
   circle(100, 100, 200);
+  point(100,100,0);
+  noFill();
   rect(100, 100, 200, 200);
   translate(100, 100, 0);
   rotateZ(theta);
