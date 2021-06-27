@@ -8,7 +8,7 @@ float targetAngle = -0.523; //Angulo em que o antebraco fica na horizontal
 float currentAngle = 0;
 float vw = -0.004; //velocidade angular
 
-float r = 3;
+float r = 7;
 int s;
 
 void setup() {
