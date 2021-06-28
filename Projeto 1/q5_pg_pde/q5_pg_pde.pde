@@ -13,8 +13,8 @@ void circles(float r, float step){
   stroke(0, 0, 255);
   strokeCap(ROUND);
   stroke(255, 0, 0);
-  x1 = x1 + 25f*cos(position*4);
-  y1 = y1 + 25f*sin(position*4);
+  x1 = x1 + 25f*sin(position*4);
+  y1 = y1 + 25f*cos(position*4);
   fill(255, 0, 0);
   circle(x1, y1, 5);
   
