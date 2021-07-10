@@ -1,49 +1,58 @@
-float a, b; //<>//
-float r = -20;
-float rAux = -20;
-float x = -20;
-float pos = 0.1f;
-boolean posAux1 = false;
-boolean posAux2 = true;
+float alpha = 0; //<>//
+float w = PI/240; //rotação de 180° em 4s
 
-void strokeTest(float r, float x, float step){
-    a = 240 +  r * cos(pos/8);
-    b = 320 +  r * sin(pos/8);
-    stroke(155, 0, 0);
-    fill(155,0,0);
-    ellipse(a, b, 3, 3);
-    strokeCap(ROUND);
+//coordenadas iniciais
+float px = -20;
+float py = 0;
 
-    pos+=step;
+//coordenadas do centro que são modificadas qnd passa no 0x
+float centrox = 0;
+float centroy = 0;
+int i = 1;
+
+void pontos() {
+  strokeWeight(10);
+  stroke(255,0,0);
 }
 
-void setup(){
-  size(480, 640);
-
+void eixox() {
+  stroke(0,0,255);
 }
+
+void eixoy() {
+  stroke(0,255,0);
+}
+
+void initialSetup() {
+  translate(400,400);
+  strokeWeight(1);
+  stroke(0);
+  eixox();
+  line(-400,0,400,0);
+  eixoy();
+  line(0,400,0,-400);
+  scale(1,-1);
+}
+
+void setup() {
+  size(800,800);
+  frameRate(60);
+}
+
 void draw(){
-  line(width/2, height, width/2, 0);
-  stroke(0, 0, 255);
-  line(0, height/2, width, height/2);
-  stroke(0, 255, 0);
-  strokeTest (r, x, -0.1);
-
-  if(a > (width/2) && posAux2 != posAux1){
-    posAux1 = true;
+  initialSetup();
+  
+  if(alpha >= PI){ //alpha >= 180°, o centro vira o  ponto inicial x e o ponto inicial x é alterado é alterado
+    alpha = 0;
+    centrox = px;
+    px += -20*pow(-2,i);
+    i++;
   }
-
-   if(a < (width/2) && posAux2 != posAux1){
-    posAux1 = false;
-  }
-
-  if(posAux2 == posAux1){
-     if(r != (2 * r)){
-       r = r + (rAux/120);
-     }
-     else{
-       posAux2 = !posAux2;
-       rAux = 4 * rAux;
-     }
-  }
-
+  
+  translate(centrox, centroy); //translada o centro para o lado, para aumentar o raio do semicirculo
+  rotate(alpha); //rotaciona o ponto
+  translate(-centrox, -centroy);
+  pontos();
+  point(px, py);
+  alpha += w; //incrementa o w para que aconteça a rotação
 }
