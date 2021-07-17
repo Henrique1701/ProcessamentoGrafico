@@ -9,28 +9,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Proj 2 - Curvas de Bezier</title>
     <link rel="stylesheet" href="style/css/style.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   </head>
 
   <body>
     <h1>Projeto 2 - Curvas de Bezier</h1>
 
     <!-- Inteface -->
-    <div id = "main" name = "buttons">
-
+    <div id = "interface">
+        <table>
+            <tr>
+                <td><label>Quantidade de avaliações</label></td>
+                <td><input type="number" nome = "avaliacoes" onchange="changeAvaliacoes(document.getElementById('avaliacoes').value)"></td>
+                <td><button name="newCurveBtn">Criar nova curva</button></td>
+                <td><button name="delCurveBtn">Deletar Curvas</button></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="poligonosCheckbox" onchange="showPoligonos(document.getElementById('poligonosCheckbox').checked)">Polígonos de controle</td>
+                <td><input type="checkbox" name="pontosCheckbox" onchange="showPontos(document.getElementById('pontosCheckbox').checked)">Pontos de controle</td>
+                <td><input type="checkbox" name="curvasCheckbox" onchange="showCurvas(document.getElementById('curvasCheckbox').checked)">Curvas</td>
+            </tr>
+        </table>
+        
     </div>
         
 
     <!-- Canvas -->
-    <div id = "main" name = "canvas">
-
+    <div id = "canvasDiv">
+        <legend id="legenda"></legend>
+        <canvas id="canvas" width="1200" height="600" class="canvas"></canvas>
     </div>
 
     <!-- Grupo 4 -->
     <h4>Grupo 4</h4>
     <table>
         <tr>
-            <th>André Luiz</th>
-            <th>alps2</th>
+            <td>André Luiz</td>
+            <td>alps2</td>
         </tr>
         <tr>
             <td>Evaldo Júnior</td>
@@ -53,6 +69,8 @@
             <td>mcmf</td>
         </tr>
     </table>
+
+    <script src="bezier.js"></script>
   </body>
 
 </html>
