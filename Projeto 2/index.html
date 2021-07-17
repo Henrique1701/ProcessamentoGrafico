@@ -21,14 +21,30 @@
         <table>
             <tr>
                 <td><label>Quantidade de avaliações</label></td>
-                <td><input type="number" nome = "avaliacoes" onchange="changeAvaliacoes(document.getElementById('avaliacoes').value)"></td>
+                <td><input type="number" nome = "avaliacoes"></td>
                 <td><button name="newCurveBtn">Criar nova curva</button></td>
                 <td><button name="delCurveBtn">Deletar Curvas</button></td>
             </tr>
             <tr>
-                <td><input type="checkbox" name="poligonosCheckbox" onchange="showPoligonos(document.getElementById('poligonosCheckbox').checked)">Polígonos de controle</td>
-                <td><input type="checkbox" name="pontosCheckbox" onchange="showPontos(document.getElementById('pontosCheckbox').checked)">Pontos de controle</td>
-                <td><input type="checkbox" name="curvasCheckbox" onchange="showCurvas(document.getElementById('curvasCheckbox').checked)">Curvas</td>
+                <td><label>Selecionar curvas: </label></td>
+                <td>
+                    <button name="previousCurveBtn"><-</button>
+                    <button name="nextCurveBtn">-></button>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Selecionar pontos: </label></td>
+                <td><button name="addPontoBtn">Adicionar ponto</button></td>
+                <td><button name="movePontoBtn">Mover ponto</button></td>
+                <td>
+                    <button name="previousPontoBtn"><-</button>
+                    <button name="nextPontoBtn">-></button>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="poligonosCheckbox">Polígonos de controle</td>
+                <td><input type="checkbox" name="pontosCheckbox">Pontos de controle</td>
+                <td><input type="checkbox" name="curvasCheckbox">Curvas</td>
             </tr>
         </table>
         
@@ -37,8 +53,8 @@
 
     <!-- Canvas -->
     <div id = "canvasDiv">
-        <legend id="legenda"></legend>
-        <canvas id="canvas" width="1200" height="600" class="canvas"></canvas>
+        <legend name="legenda"></legend>
+        <canvas name="canvas" width="1200" height="600" class="canvas"></canvas>
     </div>
 
     <!-- Grupo 4 -->
