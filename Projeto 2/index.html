@@ -9,8 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Proj 2 - Curvas de Bezier</title>
     <link rel="stylesheet" href="style/css/style.css">
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   </head>
 
   <body>
@@ -21,30 +19,31 @@
         <table>
             <tr>
                 <td><label>Quantidade de avaliações</label></td>
-                <td><input type="number" nome = "avaliacoes"></td>
-                <td><button name="newCurveBtn">Criar nova curva</button></td>
-                <td><button name="delCurveBtn">Deletar Curvas</button></td>
+                <td><input type="number" id="avaliacoes"></td>
+                <td><button id="newCurveBtn">Criar nova curva</button></td>
+                <td><button id="delCurveBtn">Deletar Curva</button></td>
             </tr>
             <tr>
                 <td><label>Selecionar curvas: </label></td>
                 <td>
-                    <button name="previousCurveBtn"><-</button>
-                    <button name="nextCurveBtn">-></button>
+                    <button id="previousCurveBtn"><-</button>
+                    <button id="nextCurveBtn">-></button>
                 </td>
             </tr>
             <tr>
                 <td><label>Selecionar pontos: </label></td>
-                <td><button name="addPontoBtn">Adicionar ponto</button></td>
-                <td><button name="movePontoBtn">Mover ponto</button></td>
+                <td><button id="addPontoBtn">Adicionar ponto</button></td>
+                <td><button id="delPontoBtn">Apagar ponto</button></td>
+                <td><button id="movePontoBtn">Mover ponto</button></td>
                 <td>
-                    <button name="previousPontoBtn"><-</button>
-                    <button name="nextPontoBtn">-></button>
+                    <button id="previousPontoBtn"><-</button>
+                    <button id="nextPontoBtn">-></button>
                 </td>
             </tr>
             <tr>
-                <td><input type="checkbox" name="poligonosCheckbox">Polígonos de controle</td>
-                <td><input type="checkbox" name="pontosCheckbox">Pontos de controle</td>
-                <td><input type="checkbox" name="curvasCheckbox">Curvas</td>
+                <td><input type="checkbox" id="poligonosCheckbox" checked>Polígonos de controle</td>
+                <td><input type="checkbox" id="pontosCheckbox" checked>Pontos de controle</td>
+                <td><input type="checkbox" id="curvasCheckbox" checked>Curvas</td>
             </tr>
         </table>
         
@@ -53,8 +52,8 @@
 
     <!-- Canvas -->
     <div id = "canvasDiv">
-        <legend name="legenda"></legend>
-        <canvas name="canvas" width="1200" height="600" class="canvas"></canvas>
+        <legend id="legenda"></legend>
+        <canvas id="canvas" width="1200" height="600" class="canvas"></canvas>
     </div>
 
     <!-- Grupo 4 -->
@@ -86,7 +85,7 @@
         </tr>
     </table>
 
-    <script src="bezier.js"></script>
+    <script src="js/bezier.js"></script>
   </body>
 
 </html>
