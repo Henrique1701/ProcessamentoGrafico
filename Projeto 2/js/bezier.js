@@ -247,7 +247,9 @@ addPontoBtn.addEventListener("click", function(event){
 delPontoBtn.addEventListener("click", function(event){
     if (curves[selectedCurve].length > 0){
         curves[selectedCurve].splice(selectedPoint[selectedCurve], 1);
-        selectedPoint.splice(selectedCurve, 1);
+        if (selectedPoint[selectedCurve] > 0) {
+            selectedPoint[selectedCurve]--;
+        }
         if (curves[selectedCurve].length == 0){
             // remove a curva, pois ela ficou vazia
             curve.splice(selectedCurve, 1);
