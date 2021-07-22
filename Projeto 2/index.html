@@ -24,25 +24,25 @@
             <tr>
                 <td><label>Quantidade de avaliações</label></td>
                 <td><input type="number" id="avaliacoes"></td>
-                <td><button id="newCurveBtn">Criar nova curva</button></td>
-                <td><button id="delCurveBtn">Deletar Curva</button></td>
             </tr>
             <tr>
                 <td><label>Selecionar curvas: </label></td>
                 <td>
                     <button id="previousCurveBtn"><-</button>
                     <button id="nextCurveBtn">-></button>
+                    <td><button id="newCurveBtn">Criar nova curva</button></td>
+                    <td><button id="delCurveBtn">Deletar Curva</button></td>
                 </td>
             </tr>
             <tr>
                 <td><label>Selecionar pontos: </label></td>
-                <td><button id="addPontoBtn">Adicionar ponto</button></td>
-                <td><button id="delPontoBtn">Apagar ponto</button></td>
-                <td><button id="movePontoBtn">Mover ponto</button></td>
                 <td>
                     <button id="previousPontoBtn"><-</button>
                     <button id="nextPontoBtn">-></button>
                 </td>
+                <td><button id="addPontoBtn">Adicionar ponto</button></td>
+                <td><button id="delPontoBtn">Apagar ponto</button></td>
+                <td><button id="movePontoBtn">Mover ponto</button></td>
             </tr>
             <tr>
                 <td><input type="checkbox" id="poligonosCheckbox" checked>Polígonos de controle</td>
@@ -56,7 +56,7 @@
 
     <!-- Canvas -->
     <div id = "canvasDiv">
-        <legend id="legenda"></legend>
+        <legend class="interface" id="legenda"></legend>
         <canvas id="canvas" width="1200" height="600" class="canvas"></canvas>
     </div>
 
