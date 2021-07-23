@@ -13,88 +13,68 @@
 
   <body>
     <div class="mae">
+        <div id = 'titulo'>
+            <div>
+                <h2>Curvas de Bezier</h2>
+            </div>
 
-    <div id = 'titulo'>
-        <h2>Curvas de Bezier</h2>
-    </div>
+            <div>
+                <ul>
+                    <li><a class="noHover"><b>Grupo 04</b></a></li>
+                    <li><a href="mailto:alps2@cin.ufpe.br">André Luiz • alps2</a></li>
+                    <li><a href="mailto:egsj@cin.upe.br">Evaldo Júnior • egsj</a></li>
+                    <li><a href="mailto:idrs@cin.ufpe.br">Igor Domingos • idrs</a></li>
+                    <li><a href="mailto:jhfs@cin.ufpe.br">José Henrique • jhfs</a></li>
+                    <li><a href="mailto:lavn@cin.ufpe.br">Lucas Asafe • lavn</a></li>
+                    <li><a href="mailto:mcmf@cin.ufpe.br">Melissa Falcão • mcmf</a></li>
+                  </ul>
+            </div>
+        </div>
 
-    <!-- Inteface -->
-    <div class = "interface">
-        <table>
-            <tr>
-                <td><label>Quantidade de avaliações</label></td>
-                <td><input type="number" id="avaliacoes"></td>
-            </tr>
-            <tr>
-                <td><label>Selecionar curvas: </label></td>
-                <td>
-                    <button id="previousCurveBtn"><-</button>
-                    <button id="nextCurveBtn">-></button>
-                    <td><button id="newCurveBtn">Criar nova curva</button></td>
-                    <td><button id="delCurveBtn">Deletar Curva</button></td>
-                </td>
-            </tr>
-            <tr>
-                <td><label>Selecionar pontos: </label></td>
-                <td>
-                    <button id="previousPontoBtn"><-</button>
-                    <button id="nextPontoBtn">-></button>
-                </td>
-                <td><button id="addPontoBtn">Adicionar ponto</button></td>
-                <td><button id="delPontoBtn">Apagar ponto</button></td>
-                <td><button id="movePontoBtn">Mover ponto</button></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="poligonosCheckbox" checked>Polígonos de controle</td>
-                <td><input type="checkbox" id="pontosCheckbox" checked>Pontos de controle</td>
-                <td><input type="checkbox" id="curvasCheckbox" checked>Curvas</td>
-            </tr>
-        </table>
+        <!-- Inteface -->
+        <div class = "interface">
+            <table>
+                <tr>
+                    <td><label>Quantidade de avaliações</label></td>
+                    <td><input type="number" id="avaliacoes"></td>
+                </tr>
+                <tr>
+                    <td><label>Selecionar curvas:</label></td>
+                    <td>
+                        <button id="previousCurveBtn"><i class="arrow left"></i></button>
+                        <button id="nextCurveBtn"><i class="arrow right"></i></button>
+                        <td><button id="newCurveBtn">Criar Nova Curva</button></td>
+                        <td><button id="delCurveBtn">Deletar Curva</button></td>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Selecionar pontos:</label></td>
+                    <td>
+                        <button id="previousPontoBtn"><i class="arrow left"></i></button>
+                        <button id="nextPontoBtn"><i class="arrow right"></i></button>
+                    </td>
+                    <td><button id="addPontoBtn">Adicionar Ponto</button></td>
+                    <td><button id="delPontoBtn">Apagar Ponto</button></td>
+                    <td><button id="movePontoBtn">Mover Ponto</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="poligonosCheckbox" checked>Polígonos de controle</td>
+                    <td><input type="checkbox" id="pontosCheckbox" checked>Pontos de controle</td>
+                    <td><input type="checkbox" id="curvasCheckbox" checked>Curvas</td>
+                </tr>
+            </table>
+            
+        </div>
+            
+
+        <!-- Canvas -->
+        <div id = "canvasDiv">
+            <legend class="interface" id="legenda"></legend>
+            <canvas id="canvas" width="1200" height="600" class="canvas"></canvas>
+        </div>
         
+        <script src="js/bezier.js"></script>
     </div>
-        
-
-    <!-- Canvas -->
-    <div id = "canvasDiv">
-        <legend class="interface" id="legenda"></legend>
-        <canvas id="canvas" width="1200" height="600" class="canvas"></canvas>
-    </div>
-
-    <!-- Grupo 4 -->
-    <div id="grupoTitulo">
-        <h4>Grupo 4</h4>
-    </div>
-    
-    <div id = "grupo">
-    <table>
-        <tr>
-            <td>André Luiz</td>
-            <td>alps2</td>
-        </tr>
-        <tr>
-            <td>Evaldo Júnior</td>
-            <td>egsj</td>
-        </tr>
-        <tr>
-            <td>Igor Domingos</td>
-            <td>idrs</td>
-        </tr>
-        <tr>
-            <td>José Henrique</td>
-            <td>jhfs</td>
-        </tr>
-        <tr>
-            <td>Lucas Asafe</td>
-            <td>lavn</td>
-        </tr>
-        <tr>
-            <td>Melissa Falcão</td>
-            <td>mcmf</td>
-        </tr>
-    </table>
-</div>
-    <script src="js/bezier.js"></script>
-</div>
   </body>
 
 </html>
