@@ -4,9 +4,6 @@ PVector refletir(PVector incidente, PVector normal) {
 }
 
 color capturarPixel(PImage imagem, int pixelX, int pixelY) {
-  if(pixelX < 0 || pixelY < 0 || pixelX >= imagem.width || pixelY >= imagem.height) {
-    return color(preto);
-  }
   return imagem.pixels[pixelY*imagem.width + pixelX];
 }
 
@@ -41,9 +38,9 @@ color juntarComponentes(color corDifusa, color corEspecular) {
 
 color iluminarCor(color cor) {
   color novaCor;
-  float novoVermelho = red(cor)+red(corDaLuz)/255.0;
-  float novoVerde = green(cor)+green(corDaLuz)/255.0;
-  float novoAzul = blue(cor)+blue(corDaLuz)/255.0;
+  float novoVermelho = red(cor)*red(corDaLuz)/255.0;
+  float novoVerde = green(cor)*green(corDaLuz)/255.0;
+  float novoAzul = blue(cor)*blue(corDaLuz)/255.0;
   novaCor = color(novoVermelho, novoVerde, novoAzul, alpha(cor));
   return novaCor;
 }

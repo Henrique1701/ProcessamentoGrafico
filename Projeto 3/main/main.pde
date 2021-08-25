@@ -42,7 +42,7 @@ void setup() {
 void draw() {
   botoes();
   corDaLuz = color (r,g,b);
-  direcaoLuz = new PVector(mouseX = width/10, mouseY = height/10, 0.1).normalize();
+  direcaoLuz = new PVector(mouseX - width/10, mouseY - height/10, 0.1).normalize();
   imagemFinal = createImage(imagemDifusa.width, imagemDifusa.height, ARGB);
   renderizarImagem();
   image(imagemFinal,coordX,coordY);
