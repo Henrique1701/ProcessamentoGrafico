@@ -1,47 +1,47 @@
 void botoes() {
-stroke(controleDifuso[0]);
-strokeWeight(4);
-fill(controleDifuso[1]);
-rect(2,2,width/4-4,40);
-fill(controleDifuso[2]);
-textSize(fonteBotaoComponente);
-text("Difuso", width/8,20);
+  stroke(controleDifuso[0]);
+  strokeWeight(4);
+  fill(controleDifuso[1]);
+  rect(2,2,width/4-4,40);
+  fill(controleDifuso[2]);
+  textSize(fonteBotaoComponente);
+  text("Difuso", width/8,20);
 
-stroke(controleEspecular[0]);
-strokeWeight(4);
-fill(controleEspecular[1]);
-rect(2,2,width/4-4,40);
-fill(controleDifuso[2]);
-textSize(fonteBotaoComponente);
-text("Difuso", width/8,20);
-
-//cores
-stroke(controleVermelho);
-strokeWeight(4);
-fill(r,0,0);
-circle(7*width/12+20,22,40);
-fill(preto);
-textSize(fonteBotaoCores);
-textAlign(CENTER, CENTER);
-text('R',7*width/12+20,22);
-
-stroke(controleVerde);
-strokeWeight(4);
-fill(0,g,0);
-circle(9*width/12+20,22,40);
-fill(preto);
-textSize(fonteBotaoCores);
-textAlign(CENTER, CENTER);
-text('G',9*width/12+20,22);
-
-stroke(controleAzul);
-strokeWeight(4);
-fill(0,0,b);
-circle(11*width/12+20,22,40);
-fill(preto);
-textSize(fonteBotaoCores);
-textAlign(CENTER, CENTER);
-text('B',11*width/12+20,22);
+  stroke(controleEspecular[0]);
+  strokeWeight(4);
+  fill(controleEspecular[1]);
+  rect(2,2,width/4-4,40);
+  fill(controleDifuso[2]);
+  textSize(fonteBotaoComponente);
+  text("Difuso", width/8,20);
+  
+  //cores
+  stroke(controleVermelho);
+  strokeWeight(4);
+  fill(r,0,0);
+  circle(7*width/12+20,22,40);
+  fill(preto);
+  textSize(fonteBotaoCores);
+  textAlign(CENTER, CENTER);
+  text('R',7*width/12+20,22);
+  
+  stroke(controleVerde);
+  strokeWeight(4);
+  fill(0,g,0);
+  circle(9*width/12+20,22,40);
+  fill(preto);
+  textSize(fonteBotaoCores);
+  textAlign(CENTER, CENTER);
+  text('G',9*width/12+20,22);
+  
+  stroke(controleAzul);
+  strokeWeight(4);
+  fill(0,0,b);
+  circle(11*width/12+20,22,40);
+  fill(preto);
+  textSize(fonteBotaoCores);
+  textAlign(CENTER, CENTER);
+  text('B',11*width/12+20,22);
 }
 
 void mouseClicked() {
