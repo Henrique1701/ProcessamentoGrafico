@@ -5,15 +5,17 @@ void botoes() {
   rect(2,2,width/4-4,40);
   fill(controleDifuso[2]);
   textSize(fonteBotaoComponente);
+  textAlign(CENTER, CENTER);
   text("Difuso", width/8,20);
 
   stroke(controleEspecular[0]);
   strokeWeight(4);
   fill(controleEspecular[1]);
-  rect(2,2,width/4-4,40);
+  rect(width/4+2,2,width/4-4,40);
   fill(controleDifuso[2]);
   textSize(fonteBotaoComponente);
-  text("Difuso", width/8,20);
+  textAlign(CENTER, CENTER);
+  text("Especular", 3*width/8,20);
   
   //cores
   stroke(controleVermelho);
@@ -32,7 +34,7 @@ void botoes() {
   fill(preto);
   textSize(fonteBotaoCores);
   textAlign(CENTER, CENTER);
-  text('G',9*width/12+20,22);
+  text('G',9*width/12,22);
   
   stroke(controleAzul);
   strokeWeight(4);
