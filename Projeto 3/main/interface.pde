@@ -16,34 +16,26 @@ void botoes() {
   textSize(fonteBotaoComponente);
   textAlign(CENTER, CENTER);
   text("Especular", 3*width/8,20);
-  
-  //cores
-  stroke(controleVermelho);
+}
+
+void sliders() {
+  stroke(255);
   strokeWeight(4);
-  fill(r,0,0);
-  circle(7*width/12+20,22,40);
-  fill(preto);
-  textSize(fonteBotaoCores);
-  textAlign(CENTER, CENTER);
-  text('R',7*width/12+20,22);
+  line(posicaoInicialSliders, 10, posicaoInicialSliders+255, 10);
+  line(posicaoInicialSliders, 30, posicaoInicialSliders+255, 30);
+  line(posicaoInicialSliders, 50, posicaoInicialSliders+255, 50);
   
-  stroke(controleVerde);
-  strokeWeight(4);
-  fill(0,g,0);
-  circle(9*width/12+20,22,40);
-  fill(preto);
-  textSize(fonteBotaoCores);
-  textAlign(CENTER, CENTER);
-  text('G',9*width/12+20,22);
+  stroke(0);
+  strokeWeight(1);
   
-  stroke(controleAzul);
-  strokeWeight(4);
-  fill(0,0,b);
-  circle(11*width/12+20,22,40);
-  fill(preto);
-  textSize(fonteBotaoCores);
-  textAlign(CENTER, CENTER);
-  text('B',11*width/12+20,22);
+  fill(200, 50, 50);
+  circle(posicaoR, 10, 20);
+
+  fill(50, 200, 50);
+  circle(posicaoG, 30, 20);
+  
+  fill(50, 50, 200);
+  circle(posicaoB, 50, 20);
 }
 
 void mouseClicked() {
@@ -69,58 +61,53 @@ void mouseClicked() {
       controleEspecular[1] = cinza;
       controleEspecular[2] = preto;
     }
-  } else if ((((abs(mouseX) - (7*width/12+20)) <= 22)&&(abs(mouseY - 22) <= 22))) {
-    // Clicou no botão "R"
-    if (controleVermelho == preto) {
-      controleVermelho = branco;
-    } else {
-      controleVermelho = preto;
-    }
-  } else if ((((abs(mouseX) - (9*width/12+20)) <= 22)&&(abs(mouseY - 22) <= 22))) {
-    // Clicou no botão "G"
-    if (controleVerde == preto) {
-      controleVerde = branco;
-    } else {
-      controleVerde = preto;
-    }
-  } else if ((((abs(mouseX) - (11*width/12+20)) <= 22)&&(abs(mouseY - 22) <= 22))) {
-    // Clicou no botão "B"
-    if (controleAzul == preto) {
-      controleAzul = branco;
-    } else {
-      controleAzul = preto;
-    }
   }
 }
 
-void keyPressed() {
-  if (key == CODED) {
-    if (controleVermelho == branco) {
-      // Controla a intensidade da luz vermelha
-      if (keyCode == UP) {
-         r = min(r - 5,255);
-      } else if (keyCode == DOWN) {
-        r = max(r - 5,0);
-      }
+void mousePressed() {
+  // Método que é chamado sempre que o botão do mouse é pressionado
+  // E verifica se está pressionando algum dos sliders
+  if(mouseX >= posicaoR-10 && mouseX <= posicaoR+10 && mouseY >= 0 && mouseY <= 20) {
+    pressionandoR = true;
+    deslocamentoR = mouseX - posicaoR;
+  } else if (mouseX >= posicaoG-10 && mouseX <= posicaoG+10 && mouseY >= 20 && mouseY <= 40) {
+    pressionandoG = true;
+    deslocamentoG = mouseX - posicaoG;
+  } else if (mouseX >= posicaoB-10 && mouseX <= posicaoB+10 && mouseY >= 40 && mouseY <= 60) {
+    pressionandoB = true;
+    deslocamentoB = mouseX - posicaoB;
+  }
+}
+
+void mouseReleased() {
+  // Método que é chamado toda vez que para de pressionar o botão do mouse
+  pressionandoR = false; 
+  pressionandoG = false;
+  pressionandoB = false;
+}
+
+void mouseDragged() {
+  // Método chamado toda vez que mexe o mouse com o botão pressionado
+  // E verifica se precisa atualiar a posição de algum slider
+  if (pressionandoR) {
+    float novaPosicao = mouseX-deslocamentoR;
+    if (novaPosicao > posicaoInicialSliders && novaPosicao < posicaoInicialSliders+255) {
+      posicaoR = novaPosicao;
+      r = posicaoR - posicaoInicialSliders;
     }
-    
-    if (controleVerde == branco) {
-      // Controla a intensidade da luz verde
-      if (keyCode == UP) {
-         g = min(g - 5,255);
-      } else if (keyCode == DOWN) {
-        g = max(g - 5,0);
-      }
+  } 
+  else if (pressionandoG) {
+    float novaPosicao = mouseX-deslocamentoG;
+    if (novaPosicao > posicaoInicialSliders && novaPosicao < posicaoInicialSliders+255) {
+      posicaoG = novaPosicao;
+      g = posicaoG - posicaoInicialSliders;
     }
-    
-    if (controleAzul == branco) {
-      // Controla a intensidade da luz azul
-      if (keyCode == UP) {
-         b = min(b - 5,255);
-      } else if (keyCode == DOWN) {
-        b = max(b - 5,0);
-      }
+  }
+  else if (pressionandoB) {
+    float novaPosicao = mouseX-deslocamentoB;
+    if (novaPosicao > posicaoInicialSliders && novaPosicao < posicaoInicialSliders+255) {
+      posicaoB = novaPosicao;
+      b = posicaoB - posicaoInicialSliders;
     }
-    
   }
 }
