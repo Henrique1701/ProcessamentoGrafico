@@ -55,11 +55,11 @@ void renderizarImagem(){
       color diffuseCol = calcularComponenteDifusa(difusa,normal);
       color specularCol = calcularComponenteEspecular(especular,normal);
       
-      if((controleDifuso[0] == branco) & (controleEspecular[0] == branco)) {
+      if((controleDifuso[1] == branco) & (controleEspecular[1] == branco)) {
         imagemFinal.pixels[y*imagemDifusa.width + x] = juntarComponentes(diffuseCol, specularCol);
-      } else if ((controleDifuso[0] == branco) & (controleEspecular[0] == preto)) {
+      } else if ((controleDifuso[1] == branco) & (controleEspecular[1] == cinza)) {
         imagemFinal.pixels[y*imagemDifusa.width + x] = diffuseCol;
-      } else if ((controleDifuso[0] == preto) & (controleEspecular[0] == branco)) {
+      } else if ((controleDifuso[1] == cinza) & (controleEspecular[1] == branco)) {
         imagemFinal.pixels[y*imagemDifusa.width + x] = specularCol;
       } else {
         imagemFinal.pixels[y*imagemDifusa.width + x] = normal;
@@ -67,5 +67,5 @@ void renderizarImagem(){
 
       
     }
-    }
   }
+}

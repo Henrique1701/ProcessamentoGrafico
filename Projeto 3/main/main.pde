@@ -3,12 +3,12 @@ PImage imagemDifusa;
 PImage imagemEspecular;
 PImage imagemFinal;
 
-int branco = 255;
-int cinza = 167;
-int preto = 0;
+color preto = color(52,52,52);
+color cinza = color(100,100,100); 
+color branco = color(245,245,245);
 
-int controleDifuso[] = {branco,preto,branco};
-int controleEspecular[] = {branco,preto,branco};
+int controleDifuso[] = {branco,branco,preto};
+int controleEspecular[] = {branco,branco,preto};
 
 float r = 255;
 float g = 255;
@@ -24,7 +24,7 @@ float deslocamentoR = 0;
 float deslocamentoG = 0;
 float deslocamentoB = 0;
 
-int fonteBotaoComponente = 30;
+int fonteBotaoComponente = 20;
 int fonteBotaoCores = 25;
 
 PVector direcaoVista = new PVector(0,1,1);
@@ -50,8 +50,15 @@ void setup() {
   posicaoB = posicaoInicialSliders + b;
 }
 
+void fundo() {
+  fill(color(52,52,52));
+  rect(10,10,780,80,8,8,8,8);
+}
+
+
 void draw() {
   background(0);
+  fundo();
   botoes();
   sliders();
   corDaLuz = color (r,g,b);
